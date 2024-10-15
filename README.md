@@ -127,9 +127,21 @@ The **Portsmouth Destroyers Strength & Conditioning Tracker** is a web applicati
    ```
 
 6. **Obtain SSL Certificate** (for HTTPS) using Certbot:
-   ```bash
-   sudo certbot --nginx -d ruben-tanner.uk -d www.ruben-tanner.uk
-   ```
+
+   - To secure your website, run the following command to obtain an SSL certificate:
+     ```bash
+     sudo certbot --nginx -d ruben-tanner.uk -d www.ruben-tanner.uk
+     ```
+   - **Explanation**: This command uses **Certbot**, a free and open-source tool, to obtain and install SSL certificates from **Let's Encrypt**. The `--nginx` flag allows Certbot to automatically configure Nginx to use the new certificates, and the `-d` flags specify the domains to secure.
+   - After running this command, you will receive prompts to agree to the terms of service and provide an email address for renewal reminders.
+   - **Renewal**: Let's Encrypt certificates are valid for **90 days**. Certbot will automatically set up a cron job to renew the certificate, ensuring that your website remains secure.
+
+7. **Verify SSL Certificate Setup**:
+   - You can manually test the renewal process to ensure it works without issues:
+     ```bash
+     sudo certbot renew --dry-run
+     ```
+   - This command simulates the renewal process without actually renewing the certificate, helping verify that everything is correctly set up.
 
 ### Accessing the Application
 
@@ -150,6 +162,19 @@ The **Portsmouth Destroyers Strength & Conditioning Tracker** is a web applicati
 3. **Export Weekly Data**:
    - Enter the correct password to export the data as a JSON file.
    - Data is cleared each week after export.
+
+## Highlighted Features those curious
+
+### SSL/TLS Integration
+
+- Implemented **SSL/TLS certificates** using **Let's Encrypt** to secure all communications between clients and the server.
+- Configured **Nginx** to redirect all HTTP traffic to **HTTPS**, ensuring data privacy and security.
+- Set up automatic certificate **renewal** using Certbot to keep the SSL certificates up to date without manual intervention, demonstrating knowledge of security best practices.
+
+### Deployment and Process Management
+
+- Used **Nginx** as a **reverse proxy** to manage incoming requests and serve static assets efficiently, which is a common practice in modern web applications.
+- Deployed the Node.js server with **PM2** to ensure high availability and manage application restarts in case of failure.
 
 ## Contributing
 
