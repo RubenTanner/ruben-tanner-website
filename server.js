@@ -1,5 +1,3 @@
-// server.js - Node.js backend logic
-
 require("dotenv").config();
 
 const express = require("express");
@@ -101,7 +99,7 @@ setInterval(() => {
   if (now.getDay() === 0 && now.getHours() === 0) {
     saveWeeklyDataToFile();
   }
-}, 60 * 60 * 1000); // Check every hour
+}, 60 * 60 * 1000);
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

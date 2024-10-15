@@ -1,5 +1,3 @@
-// main.js - Client-side JavaScript for frontend logic
-
 // Frontend JavaScript
 const form = document.getElementById("strength-form");
 const resultsDiv = document.getElementById("results");
