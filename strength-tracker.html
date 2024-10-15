@@ -24,6 +24,7 @@
       rel="manifest"
       href="/assets/strength-tracker-favico/images/site.webmanifest"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div class="container">
@@ -49,6 +50,7 @@
           aria-label="Name"
           pattern="[A-Za-z\s]+"
           title="Please enter a valid name (letters only)"
+          autocomplete="name"
         /><br /><br />
 
         <label for="weight">Weight (kg):</label>
@@ -60,6 +62,7 @@
           min="1"
           aria-label="Weight"
           inputmode="numeric"
+          autocomplete="off"
         /><br /><br />
 
         <label for="position">Position:</label>
@@ -84,6 +87,7 @@
           step="0.1"
           aria-label="Bench Press"
           inputmode="numeric"
+          autocomplete="off"
         /><br /><br />
 
         <label for="squat">Squat (kg):</label>
@@ -96,6 +100,7 @@
           step="0.1"
           aria-label="Squat"
           inputmode="numeric"
+          autocomplete="off"
         /><br /><br />
 
         <label for="deadlift">Deadlift (kg):</label>
@@ -108,6 +113,7 @@
           step="0.1"
           aria-label="Deadlift"
           inputmode="numeric"
+          autocomplete="off"
         /><br /><br />
 
         <button type="submit">Submit</button>
