@@ -1,5 +1,7 @@
 // main.js - Combined Node.js backend and frontend logic
 
+require("dotenv").config(); // Add this line at the top
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -53,6 +55,16 @@ app.post("/api/submit", (req, res) => {
 // API to get all weekly data
 app.get("/api/data", (req, res) => {
   res.json(weeklyData);
+});
+
+// API to validate password for export
+app.post("/api/validate-password", (req, res) => {
+  const { password } = req.body;
+  if (password === process.env.EXPORT_PASSWORD) {
+    res.status(200).send("Password is valid.");
+  } else {
+    res.status(403).send("Invalid password.");
+  }
 });
 
 // Function to get the current year and week number
@@ -193,21 +205,29 @@ async function loadResults() {
 // Handle export button click
 exportButton.addEventListener("click", async () => {
   const enteredPassword = passwordInput.value;
-  const correctPassword = "DestroyersBaby!";
 
-  if (enteredPassword === correctPassword) {
-    try {
-      const response = await fetch("/api/data");
-      const weeklyData = await response.json();
+  try {
+    const response = await fetch("/api/validate-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password: enteredPassword }),
+    });
+
+    if (response.ok) {
+      // Password is valid, proceed to export the data
+      const weeklyDataResponse = await fetch("/api/data");
+      const weeklyData = await weeklyDataResponse.json();
       const [year, week] = getWeekNumber(new Date());
       const filename = `strength-data_${year}_week${week}.json`;
       exportToJSON(weeklyData, filename);
       passwordInput.value = "";
-    } catch (error) {
-      alert("Error exporting data: " + error.message);
+    } else {
+      throw new Error("Invalid password. Please try again.");
     }
-  } else {
-    alert("Incorrect password. Please try again.");
+  } catch (error) {
+    alert(error.message);
   }
 });
 
