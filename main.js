@@ -1,4 +1,4 @@
-// main.js - Combined Node.js backend and frontend logic
+// strength-tracker.js - Combined Node.js backend and frontend logic
 
 require("dotenv").config(); // Add this line at the top
 
@@ -9,17 +9,17 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const port = 3000;
+const port = 3000; // Ensure that this port is open and accessible
 
 let weeklyData = []; // In-memory storage for simplicity, replace with a real database
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "assets")));
 
 // Serve the HTML file
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "strength-tracker.html"));
 });
 
 // API to submit strength data
