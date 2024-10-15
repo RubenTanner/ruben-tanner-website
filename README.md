@@ -183,3 +183,7 @@ Feel free to contribute to this project by opening an issue or submitting a pull
 ## Contact
 
 For any questions or concerns, reach out via [GitHub](https://github.com/rubentanner/).
+
+## Scheduled Updates
+
+Please note that the application undergoes scheduled updates **Sunday evenings**. During this time, the application may be temporarily unavailable as I perform maintenance and updates.
