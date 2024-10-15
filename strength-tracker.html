@@ -27,6 +27,16 @@
   </head>
   <body>
     <div class="container">
+      <div
+        class="logo-container"
+        style="text-align: center; margin-bottom: 20px"
+      >
+        <img
+          src="assets/logo.jpg"
+          alt="Destroyers Logo"
+          style="width: 150px; height: auto"
+        />
+      </div>
       <h1>Destroyers Strength Tracker</h1>
 
       <form id="strength-form">
@@ -37,6 +47,8 @@
           name="name"
           required
           aria-label="Name"
+          pattern="[A-Za-z\s]+"
+          title="Please enter a valid name (letters only)"
         /><br /><br />
 
         <label for="weight">Weight (kg):</label>
@@ -47,6 +59,7 @@
           required
           min="1"
           aria-label="Weight"
+          inputmode="numeric"
         /><br /><br />
 
         <label for="position">Position:</label>
@@ -70,6 +83,7 @@
           min="0"
           step="0.1"
           aria-label="Bench Press"
+          inputmode="numeric"
         /><br /><br />
 
         <label for="squat">Squat (kg):</label>
@@ -81,6 +95,7 @@
           min="0"
           step="0.1"
           aria-label="Squat"
+          inputmode="numeric"
         /><br /><br />
 
         <label for="deadlift">Deadlift (kg):</label>
@@ -92,6 +107,7 @@
           min="0"
           step="0.1"
           aria-label="Deadlift"
+          inputmode="numeric"
         /><br /><br />
 
         <button type="submit">Submit</button>
