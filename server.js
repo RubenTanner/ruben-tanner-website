@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 const fs = require("fs");
+const nodemailer = require("nodemailer");
 
 const app = express();
 const port = 3000;
@@ -67,6 +68,39 @@ app.post("/api/validate-password", (req, res) => {
     res.status(200).send("Password is valid.");
   } else {
     res.status(403).send("Invalid password.");
+  }
+});
+
+app.post("/api/contact", async (req, res) => {
+  const { email, message } = req.body;
+
+  if (!email || !message) {
+    return res.status(400).send("Email and message are required.");
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.zoho.com",
+      port: 465, // or 587 for TLS
+      secure: true, // true for port 465, false for other ports
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: `"Contact Form" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      subject: `New Message from ${email}`,
+      text: message,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).send("Message sent successfully.");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to send message.");
   }
 });
 
