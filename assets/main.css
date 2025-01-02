@@ -1,144 +1,293 @@
-/* The delightful font import: */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+/* The delightful font import */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&family=IBM+Plex+Serif:wght@400;700&display=swap");
 
 html {
   --bg-light: #ffffff;
   --bg-dark: #121212;
   --fg-light: #000000;
   --fg-dark: #ffffff;
+  --accent: #4169e1;
+  --on-accent: #ffffff;
 }
 
 @media (prefers-color-scheme: light) {
   html {
-    --foreground: var(--fb-light);
     --background: var(--bg-light);
+    --foreground: var(--fg-light);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   html {
-    --foreground: var(--fg-dark);
     --background: var(--bg-dark);
+    --foreground: var(--fg-dark);
   }
-}
-
-@media (orientation: landscape) {
-  .max-65 {
-    max-width: 65%;
-    padding: 0 17.5%;
-  }
-
-  .max-50 {
-    max-width: 50%;
-    padding: 0 25%;
-  }
-}
-
-@media (orientation: portrait) {
-  .max-65,
-  .max-50 {
-    padding: 0 2%;
-  }
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 body {
-  color: var(--foreground);
-  background-color: var(--background);
-
-  padding: 0;
-  margin: 0;
-
   font-family: "IBM Plex Sans", sans-serif;
-}
-
-#main {
-  min-height: calc(100vh - 2.5rem);
-}
-
-footer {
-  color: var(--on-accent);
-  background-color: var(--accent);
-
+  background: var(--background);
+  color: var(--foreground);
+  margin: 0;
   padding: 0;
-  margin: 0;
-  height: 2.5rem;
-}
-
-footer p {
-  margin: 0.5rem;
-}
-
-.top-pane {
-  color: var(--on-accent);
-  background-color: var(--accent);
-
-  padding: 3rem;
-  margin: 0;
-}
-
-.top-pane h1 {
-  font-size: 4rem;
-  margin: 0;
-}
-
-.top-pane p {
-  font-size: 1.5rem;
-}
-
-.top-pane a,
-footer a {
-  color: var(--on-accent);
-  text-align: center;
-  text-decoration-color: var(--on-accent);
-}
-
-.socials {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
   font-size: 1.3rem;
-}
-
-.socials a i {
-  padding: 0 0.25em 0 0;
-}
-
-.project h1 {
-  border-bottom: 0.15rem solid var(--accent);
-}
-
-.project h1 a {
-  text-decoration: underline;
-  text-decoration-color: var(--foreground);
-  text-decoration-thickness: 0.025em;
-}
-
-.last {
-  border-top: 0.15rem solid var(--accent);
-}
-
-.last p {
-  font-size: 1.3rem;
-}
-
-h1 {
-  margin: 0.5em 0 0.25em;
-  font-size: 2rem;
-}
-
-p {
-  text-align: justify;
-  font-size: 1.1rem;
 }
 
 a {
+  color: var(--accent);
+}
+
+.container {
+  width: 65%;
+  margin: auto;
+  border: 1px solid var(--accent);
+  background-color: var(--background);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.content {
+  width: 100%;
+  margin: auto;
+  border: 1px solid var(--accent);
+  background-color: var(--background);
+  box-sizing: border-box;
+}
+
+header {
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid var(--accent);
+}
+
+nav {
+  background: var(--background);
   color: var(--foreground);
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: 2px solid var(--accent);
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+nav ul li a:hover {
   text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 0.1em;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+#welcome {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+section h2 {
+  color: var(--foreground);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 5px;
+}
+
+footer {
+  background: var(--background);
+  color: var(--foreground);
+  text-align: center;
+  padding: 10px;
+  border-top: 2px solid var(--accent);
+}
+
+form {
+  margin-top: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input[type="email"] {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid var(--accent);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+form input[type="submit"] {
+  padding: 10px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: none;
+  cursor: pointer;
+}
+
+form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid var(--accent);
+  background: var(--background);
+  color: var(--foreground);
+  padding: 10px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+form input[type="submit"]:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.project {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.project-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.project-info {
+  flex: 1;
+  width: calc(100% - 220px);
+  box-sizing: border-box;
+}
+
+.view-button {
+  padding: 10px 20px;
+  background-color: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.view-button:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .project {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .project-info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  nav ul li a {
+    font-size: 18px;
+  }
+
+  header {
+    padding: 10px;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section h2 {
+    font-size: 24px;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="submit"] {
+    font-size: 16px;
+  }
+
+  .view-button {
+    padding: 8px 16px;
+  }
+
+  footer {
+    padding: 5px;
+    font-size: 14px;
+  }
+}
+
+.typewriter {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid var(--foreground);
+  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  max-width: 100%;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--foreground);
+  }
 }
