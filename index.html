@@ -1,40 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Ruben Tanner</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      html {
-        --accent: #4169e1;
-        --on-accent: #ffffff;
-      }
-    </style>
-
-    <link rel="stylesheet" href="assets/main.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <title>Ruben Tanner - Cool Dude, even cooler website</title>
+    <link rel="stylesheet" href="/assets/main.css" />
     <script
       src="https://kit.fontawesome.com/bb487193c2.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="Super cool dude doing cool things." />
+    <meta name="keywords" content="keyword, keyword, evenMoreKeywords" />
+    <meta name="author" content="Ruben Tanner" />
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta
+      property="og:title"
+      content="Ruben Tanner - Cool Dude, even cooler website"
+    />
+    <meta
+      property="og:description"
+      content="Super cool dude doing cool things."
+    />
+    <meta property="og:url" content="ruben-tanner.uk" />
+    <meta property="og:type" content="website" />
+
+    <script defer src="assets/script.js"></script>
   </head>
 
-  <body>
-    <div id="main">
-      <section class="top-pane center">
-        <div class="max-65">
-          <h1>Oh Hi!</h1>
+  <body style="padding-bottom: 5%">
+    <div class="container">
+      <header id="welcome">
+        <h1 id="typewriter-heading"></h1>
+      </header>
+      <nav>
+        <ul>
+        <li>
+          <a href="https://github.com/rubentanner/"
+            ><i class="fa-brands fa-github" aria-hidden="true"></i
+            >/rubentanner</a
+          >
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/ruben-tanner-75a03321a/"
+            ><i class="fa-brands fa-linkedin" aria-hidden="true"></i>/Ruben
+            Tanner</a
+          >
+        </li>
+        <li>
+          <a href="https://www.instagram.com/phat.yikes_31"
+            ><i class="fa-brands fa-instagram" aria-hidden="true"></i
+            >/phat.yikes_31</a
+          >
+        </li>
+        <li>
+          <a href="https://discordapp.com/users/758775356848078848"
+            ><i class="fa-brands fa-discord" aria-hidden="true"></i
+            >@phatyikes</a
+          >
+        </li>
+      </ul>
+      </nav>
+      <main>
+        <section id="about">
+          <h2>About Me</h2>
+          <div class="about-container">
+            <div class="about-text">
+              <p>
+                I'm Ruben, a third-year software engineering student at The
+                University of Portsmouth
+              </p>
+              <p>
+                I love almost all things tech, from website development (a bit like
+                this) and API/backend work to Technology Project Management and
+                more.
+              </p>
+            </div>
+          </div>
+        </section>
 
-          <p>
-            I'm Ruben, a third-year software engineering student at The
-            University of Portsmouth
-          </p>
+        <section id="portfolio">
+          <h2>Portfolio</h2>
+          <div class="project">
+            <div class="project-info">
+              <h3>Destroyers Strength &amp; Conditioning Tracker</h3>
+              <p>
+                I saw the need to make a tracker for my university American Football
+            Team (The Portsmouth Destroyers) to help accurately track our team's
+            strength and development as we supply conditioning programs to
+            everyone. This project is ongoing, and I have lots of exciting plans
+            for it.
+              </p>
+              <a
+                href=""
+                class="view-button"
+                ><i class="fa-brands fa-github" aria-hidden="true"></i
+                  >View Project on GitHub</a
+              >
+              <a href="https://ruben-tanner.uk/strength-tracker.html" class="view-button"
+                >see it in action</a
+              >
+            </div>
+          </div>
+          <div class="project">
+            <div class="project-info">
+              <h3>This website!</h3>
+              <p>
+                If its not obvious, this website is still a work in progress.
+                I have tonnes of other projects not listed here, but its hard to keep track of them all. 
+                I'm always working on something new, so keep an eye out for updates!
+              </p>
+            </div>
+          </div>
+        </section>
 
-          <p>
-            I love almost all things tech, from website development (a bit like
-            this) and API/backend work to Technology Project Management and
-            more.
-          </p>
-
-          <div class="socials">
+        <section id="contact">
+          <h2>Contact Me</h2>
+          <form id="contactForm">
+            <label>
+              Your email:
+              <input type="email" name="email" required placeholder="email goes here" />
+            </label>
+            <label>
+              Your message:
+              <textarea
+                name="message"
+                rows="6"
+                required
+                maxlength="450"
+                placeholder="Give me a shout! what do you want to talk about?? tell me a joke maybe?"
+              ></textarea>
+            </label>
+            <button type="submit" class="view-button">Send</button>
+          </form>
+          <div id="responseMessage"></div>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2025 Ruben Tanner</p>
+        <div class="social-media">
             <a href="https://github.com/rubentanner/"
               ><i class="fa-brands fa-github" aria-hidden="true"></i
               >/rubentanner</a
@@ -51,49 +157,7 @@
               ><i class="fa-brands fa-discord" aria-hidden="true"></i
               >@phatyikes</a
             >
-          </div>
         </div>
-      </section>
-
-      <section class="max-50">
-        <div class="project">
-          <h1>Current Ongoing Projects</h1>
-          <p>
-            These are my ongoing projects, reach out to me or raise an issue on
-            <a href="https://github.com/rubentanner/">Github</a> if you
-            encounter any bugs or have any feedback.
-          </p>
-        </div>
-
-        <div class="project">
-          <h1>
-            <a href="link to code"
-              >Destroyers Strength &amp; Conditioning Tracker</a
-            >
-          </h1>
-
-          <p>
-            I saw the need to make a tracker for my university American Football
-            Team (The Portsmouth Destroyers) to help accurately track our team's
-            strength and development as we supply conditioning programs to
-            everyone. This project is ongoing, and I have lots of exciting plans
-            for it.
-          </p>
-
-          <p>
-            Want to see it in action?
-            <a href="/strength-tracker.html">It's hosted here!</a>
-          </p>
-        </div>
-
-        <div class="last">
-          <p>womp womp, you've reached the end!</p>
-        </div>
-      </section>
-    </div>
-
-    <footer class="center">
-      <p>&copy; <a href="https://ruben-tanner.uk">Ruben Tanner</a>, 2024</p>
-    </footer>
+      </footer>
   </body>
 </html>
