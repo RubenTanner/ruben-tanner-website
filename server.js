@@ -71,39 +71,6 @@ app.post("/api/validate-password", (req, res) => {
   }
 });
 
-app.post("/api/contact", async (req, res) => {
-  const { email, message } = req.body;
-
-  if (!email || !message) {
-    return res.status(400).send("Email and message are required.");
-  }
-
-  try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.zoho.com",
-      port: 465, // or 587 for TLS
-      secure: true, // true for port 465, false for other ports
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: `"Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
-      subject: `New Message from ${email}`,
-      text: message,
-    };
-
-    await transporter.sendMail(mailOptions);
-    res.status(200).send("Message sent successfully.");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Failed to send message.");
-  }
-});
-
 // Function to get the current year and week number
 function getWeekNumber(date) {
   date = new Date(
