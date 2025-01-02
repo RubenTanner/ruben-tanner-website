@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 // Serve strength-tracker.html
-app.get("/strength-tracker.html", (req, res) => {
+app.get("strength-tracker/strength-tracker.html", (req, res) => {
   res.sendFile(path.join(__dirname, "strength-tracker.html"));
 });
 
