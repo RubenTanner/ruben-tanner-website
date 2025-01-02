@@ -14,6 +14,8 @@ The **Portsmouth Destroyers Strength & Conditioning Tracker** is a web applicati
 
 ## Project Structure
 
+TODO: UPDATE THE STRUCTURE
+
 ```
 /home/web/
 ├── assets/
