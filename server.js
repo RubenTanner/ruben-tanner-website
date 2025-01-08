@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -7,7 +5,6 @@ const https = require("https");
 const http = require("http");
 const subdomain = require("express-subdomain");
 const app = express();
-const port = 3000;
 
 // SSL options for HTTPS
 const sslOptions = {
@@ -38,10 +35,8 @@ function savePosts(posts) {
 const blogRouter = express.Router();
 const adminRouter = express.Router();
 
-// Serve the HTML file
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+blogRouter.get("/", (req, res) => res.send("Blog landing page"));
+adminRouter.get("/", (req, res) => res.send("Admin panel"));
 
 app.use(subdomain("blog", blogRouter));
 app.use(subdomain("admin", adminRouter));
