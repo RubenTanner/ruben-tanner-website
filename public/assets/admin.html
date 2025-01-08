@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Blog Post</title>
+    <link rel="stylesheet" href="/public/assets/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Create a Blog Post</h1>
+      </header>
+      <main>
+        <form action="/admin/blog" method="POST">
+          <label for="title">Title:</label>
+          <input type="text" name="title" required />
+          <label for="summary">Summary:</label>
+          <textarea name="summary" rows="3" required></textarea>
+          <label for="content">Content:</label>
+          <textarea name="content" rows="10" required></textarea>
+          <button type="submit" class="view-button">Post</button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

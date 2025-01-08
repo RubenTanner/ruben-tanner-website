@@ -1,30 +1,18 @@
+// Test server for local development
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const https = require("https");
-const http = require("http");
-const subdomain = require("express-subdomain");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
+const subdomain = require("express-subdomain");
+const path = require("path");
 const app = express();
 
+// Middleware
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// env variables
-dotenv.config();
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-
-// SSL stuff
-const sslOptions = {
-  key: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/fullchain.pem"),
-};
-
 app.use(express.static(path.join(__dirname, "public")));
 
-// Mock database for blog posts TODO: Use a real database
+// Mock database for blog posts
 const blogDB = path.join(__dirname, "blog-posts.json");
+const fs = require("fs");
 if (!fs.existsSync(blogDB)) fs.writeFileSync(blogDB, JSON.stringify([]));
 
 function getPosts() {
@@ -35,7 +23,10 @@ function savePosts(posts) {
   fs.writeFileSync(blogDB, JSON.stringify(posts, null, 2));
 }
 
-// Subdomains stuff
+// Environment variables (mock for local testing)
+const ADMIN_PASSWORD = "testpassword";
+
+// Subdomains
 const blogRouter = express.Router();
 const adminRouter = express.Router();
 
@@ -96,15 +87,8 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
-// HTTP to HTTPS redirection
-http
-  .createServer((req, res) => {
-    res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
-    res.end();
-  })
-  .listen(80);
-
-// Start the HTTPS server
-https.createServer(sslOptions, app).listen(443, () => {
-  console.log("HTTPS Server running on port 443");
+// Start the local development server
+const PORT = 3000; // Use 3000 for local testing
+app.listen(PORT, () => {
+  console.log(`Test server running on http://localhost:${PORT}`);
 });

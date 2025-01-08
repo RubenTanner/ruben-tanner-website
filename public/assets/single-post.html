@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="/public/assets/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 id="post-title"></h1>
+      </header>
+      <main>
+        <p id="post-content"></p>
+        <p><strong>Views:</strong> <span id="post-views"></span></p>
+      </main>
+      <script>
+        const postId = window.location.pathname.split("/").pop();
+        fetch(`/blog/${postId}`)
+          .then((response) => response.json())
+          .then((post) => {
+            document.getElementById("post-title").textContent = post.title;
+            document.getElementById("post-content").textContent = post.content;
+            document.getElementById("post-views").textContent = post.views;
+          });
+      </script>
+    </div>
+  </body>
+</html>
