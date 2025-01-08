@@ -1,105 +1,100 @@
 require("dotenv").config();
 
 const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
+const https = require("https");
+const http = require("http");
+const subdomain = require("express-subdomain");
 const app = express();
 const port = 3000;
 
-let weeklyData = [];
+// SSL options for HTTPS
+const sslOptions = {
+  key: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/fullchain.pem"),
+};
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "assets")));
+// Middleware to parse JSON data
+app.use(express.json());
+
+// Static file serving for styles and scripts
+app.use(express.static(path.join(__dirname, "public")));
+
+// Mock database for blog posts
+const blogDB = path.join(__dirname, "blog-posts.json");
+if (!fs.existsSync(blogDB)) fs.writeFileSync(blogDB, JSON.stringify([]));
+
+// Helper to read/write blog posts
+function getPosts() {
+  return JSON.parse(fs.readFileSync(blogDB, "utf8"));
+}
+
+function savePosts(posts) {
+  fs.writeFileSync(blogDB, JSON.stringify(posts, null, 2));
+}
+
+// Subdomains
+const blogRouter = express.Router();
+const adminRouter = express.Router();
 
 // Serve the HTML file
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Serve strength-tracker.html
-app.get("strength-tracker/strength-tracker.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "strength-tracker.html"));
+app.use(subdomain("blog", blogRouter));
+app.use(subdomain("admin", adminRouter));
+
+// Route to list all blog posts
+app.get("/blog", (req, res) => {
+  const posts = getPosts();
+  res.send(posts);
 });
 
-// API to submit strength data
-app.post("/api/submit", (req, res) => {
-  const { name, weight, position, bench, squat, deadlift } = req.body;
-
-  if (!name || !weight || !position || !bench || !squat || !deadlift) {
-    return res.status(400).send("Please fill in all fields.");
-  }
-
-  const [year, week] = getWeekNumber(new Date());
-  const submissionKey = `${name}_${year}_week${week}`;
-
-  if (weeklyData.find((entry) => entry.submissionKey === submissionKey)) {
-    return res.status(400).send("You have already submitted data this week.");
-  }
-
-  const newData = {
-    name,
-    weight,
-    position,
-    bench,
-    squat,
-    deadlift,
-    date: new Date().toLocaleDateString(),
-    submissionKey,
-  };
-
-  weeklyData.push(newData);
-  res.status(200).send("Data submitted successfully.");
+// Route to serve a single blog post
+app.get("/blog/:id", (req, res) => {
+  const posts = getPosts();
+  const post = posts.find((p) => p.id === req.params.id);
+  if (!post) return res.status(404).send("Post not found");
+  res.send(post);
 });
 
-// API to get all weekly data
-app.get("/api/data", (req, res) => {
-  res.json(weeklyData);
+// Admin route to create a blog post
+app.post("/admin/blog", (req, res) => {
+  const { title, content } = req.body;
+  if (!title || !content)
+    return res.status(400).send("Title and content are required");
+
+  const posts = getPosts();
+  const id = `${Date.now()}`;
+  const newPost = { id, title, content, views: 0 };
+  posts.push(newPost);
+  savePosts(posts);
+
+  res.status(201).send(newPost);
 });
 
-// API to validate password for export
-app.post("/api/validate-password", (req, res) => {
-  const { password } = req.body;
-  if (password === process.env.EXPORT_PASSWORD) {
-    res.status(200).send("Password is valid.");
-  } else {
-    res.status(403).send("Invalid password.");
+// Middleware to count views for a blog post
+app.use("/blog/:id", (req, res, next) => {
+  const posts = getPosts();
+  const post = posts.find((p) => p.id === req.params.id);
+  if (post) {
+    post.views += 1;
+    savePosts(posts);
   }
+  next();
 });
 
-// Function to get the current year and week number
-function getWeekNumber(date) {
-  date = new Date(
-    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
-  );
-  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
-  return [date.getUTCFullYear(), weekNo];
-}
+// HTTP to HTTPS redirection
+http
+  .createServer((req, res) => {
+    res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+    res.end();
+  })
+  .listen(80);
 
-// Function to save weekly data to file and reset it
-function saveWeeklyDataToFile() {
-  const [year, week] = getWeekNumber(new Date());
-  const filename = `strength-data_${year}_week${week}.json`;
-  const filePath = path.join(__dirname, filename);
-
-  // Write the data to a file
-  fs.writeFileSync(filePath, JSON.stringify(weeklyData, null, 2));
-  console.log("Weekly data saved to file.");
-  weeklyData = []; // Clear the data for the new week
-}
-
-// Schedule weekly data save (every Sunday at midnight)
-setInterval(() => {
-  const now = new Date();
-  if (now.getDay() === 0 && now.getHours() === 0) {
-    saveWeeklyDataToFile();
-  }
-}, 60 * 60 * 1000);
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+// Start the HTTPS server
+https.createServer(sslOptions, app).listen(443, () => {
+  console.log("HTTPS Server running on port 443");
 });
