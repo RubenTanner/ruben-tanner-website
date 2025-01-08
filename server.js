@@ -6,23 +6,20 @@ const http = require("http");
 const subdomain = require("express-subdomain");
 const app = express();
 
-// SSL options for HTTPS
+app.use(express.json());
+
+//this does all my SSL stuff
 const sslOptions = {
   key: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/privkey.pem"),
   cert: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/fullchain.pem"),
 };
 
-// Middleware to parse JSON data
-app.use(express.json());
-
-// Static file serving for styles and scripts
 app.use(express.static(path.join(__dirname, "public")));
 
-// Mock database for blog posts
+// Mock database for blog posts TODO replace with a real database
 const blogDB = path.join(__dirname, "blog-posts.json");
 if (!fs.existsSync(blogDB)) fs.writeFileSync(blogDB, JSON.stringify([]));
 
-// Helper to read/write blog posts
 function getPosts() {
   return JSON.parse(fs.readFileSync(blogDB, "utf8"));
 }
@@ -31,7 +28,7 @@ function savePosts(posts) {
   fs.writeFileSync(blogDB, JSON.stringify(posts, null, 2));
 }
 
-// Subdomains
+// Subdomains stuff
 const blogRouter = express.Router();
 const adminRouter = express.Router();
 
@@ -51,7 +48,8 @@ app.get("/blog", (req, res) => {
 app.get("/blog/:id", (req, res) => {
   const posts = getPosts();
   const post = posts.find((p) => p.id === req.params.id);
-  if (!post) return res.status(404).send("Post not found");
+  if (!post)
+    return res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
   res.send(post);
 });
 
@@ -79,6 +77,11 @@ app.use("/blog/:id", (req, res, next) => {
     savePosts(posts);
   }
   next();
+});
+
+// Catch-all for 404 errors
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
 // HTTP to HTTPS redirection
