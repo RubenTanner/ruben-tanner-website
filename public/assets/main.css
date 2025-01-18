@@ -294,52 +294,43 @@ form input[type="submit"]:hover {
 
 /* Chessboard Container */
 #myBoard {
+  width: 90%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
   margin: 20px auto;
-  border: 2px solid var(--accent); /* Matches your site’s accent color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visuals */
+  border: 2px solid var(--accent);
 }
 
-/* Status and PGN Styles */
 #gameStatus {
   text-align: center;
   font-size: 1.2rem;
   margin-top: 20px;
-  color: var(--foreground); /* Text color matching the theme */
+  color: var(--foreground);
 }
 
 #gamePGN {
-  font-family: "IBM Plex Mono", monospace; /* Matches your typography */
+  font-family: "IBM Plex Mono", monospace;
   font-size: 1rem;
   color: var(--foreground);
   margin: 10px auto;
   text-align: center;
   padding: 10px;
-  border: 1px solid var(--accent); /* Matches your aesthetic */
-  background-color: var(--background); /* Theme background */
+  border: 1px solid var(--accent);
+  background-color: var(--background);
   width: 90%;
   max-width: 400px;
   border-radius: 5px;
 }
 
-/* Additional Styling for the Board */
-#myBoard .circle {
-  border-radius: 50%; /* Makes the move indicators circular */
-  width: 15%; /* Adjust size of the move indicators */
-  height: 15%;
-  background-color: rgba(255, 0, 0, 0.6); /* Red circles for valid moves */
-  position: absolute;
-  pointer-events: none; /* Prevent interaction */
-  transform: translate(-50%, -50%); /* Center the circle */
-}
-
+/* Responsive Adjustments for Smaller Screens */
 @media (max-width: 480px) {
   #myBoard {
-    width: 300px; /* Adjust board size for smaller screens */
-    height: 300px;
+    width: 100%;
+    max-width: none;
   }
 
   #gamePGN {
-    font-size: 0.9rem; /* Reduce PGN text size for smaller screens */
+    font-size: 0.9rem;
     width: 95%;
   }
 

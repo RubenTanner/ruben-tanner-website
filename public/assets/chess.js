@@ -1,17 +1,5 @@
-// This example uses the chess.js library:
-// https://github.com/jhlywa/chess.js
-
-// NOTE: the game object is separate from the board object
-// the game object:
-// - controls the state of the game
-// - understands how pieces move and what moves are legal
-// - knows who's turn it is
-// - en passant, castling, draw logic, etc
 const game = new Chess();
 
-// the board object is "dumb":
-// - shows the current position from the game
-// - handles input events from users
 const boardConfig = {
   draggable: true,
   onDragStart,
@@ -24,15 +12,8 @@ const boardConfig = {
 const board = Chessboard2("myBoard", boardConfig);
 
 updateStatus();
-
 let pendingMove = null;
 
-// There are 5 outcomes from this action:
-// - start a pending move
-// - clear a pending move
-// - clear a pending move AND start a different pending move
-// - make a move (ie: complete their pending move)
-// - do nothing
 function onTouchSquare(square, piece, boardInfo) {
   // ask chess.js what legal moves are available from this square
   const legalMoves = game.moves({ square, verbose: true });
@@ -57,12 +38,10 @@ function onTouchSquare(square, piece, boardInfo) {
     const moveResult = game.move({
       from: pendingMove,
       to: square,
-      promotion: "q", // always promote to a Queen for example simplicity
+      promotion: "q", //promote to queen as its easier
     });
 
-    // was this a legal move?
     if (moveResult) {
-      // clear circles on the board
       board.clearCircles();
 
       // update to the new position
@@ -70,23 +49,17 @@ function onTouchSquare(square, piece, boardInfo) {
         updatePGN();
         updateStatus();
 
-        // wait a smidge, then make a random move for Black
+        // wait a mo', then make a random move for Black
         window.setTimeout(makeRandomMove, 250);
       });
-
-      // if the move was not legal, then start a new pendingMove from this square
     } else if (piece) {
       pendingMove = square;
 
-      // remove any previous circles
       board.clearCircles();
 
-      // add circles showing where the legal moves are for this piece
       legalMoves.forEach((m) => {
         board.addCircle(m.to);
       });
-
-      // else clear pendingMove
     } else {
       pendingMove = null;
       board.clearCircles();
@@ -126,22 +99,17 @@ function updatePGN() {
 }
 
 function onDragStart(dragStartEvt) {
-  // do not pick up pieces if the game is over
   if (game.game_over()) return false;
 
-  // only pick up pieces for White
   if (!isWhitePiece(dragStartEvt.piece)) return false;
 
-  // what moves are available to White from this square?
   const legalMoves = game.moves({
     square: dragStartEvt.square,
     verbose: true,
   });
 
-  // do nothing if there are no legal moves
   if (legalMoves.length === 0) return false;
 
-  // place Circles on the possible target squares
   legalMoves.forEach((move) => {
     board.addCircle(move.to);
   });
@@ -154,7 +122,6 @@ function isWhitePiece(piece) {
 function makeRandomMove() {
   const possibleMoves = game.moves();
 
-  // game over
   if (possibleMoves.length === 0) return;
 
   const randomIdx = Math.floor(Math.random() * possibleMoves.length);
@@ -166,34 +133,26 @@ function makeRandomMove() {
 }
 
 function onDrop(dropEvt) {
-  // see if the move is legal
   const move = game.move({
     from: dropEvt.source,
     to: dropEvt.target,
-    promotion: "q", // NOTE: always promote to a queen for example simplicity
+    promotion: "q",
   });
 
-  // remove all Circles from the board
   board.clearCircles();
 
-  // the move was legal
   if (move) {
-    // reset the pending move
     pendingMove = null;
 
-    // update the board position
     board.fen(game.fen(), () => {
       updateStatus();
       updatePGN();
 
-      // make a random legal move for black
       window.setTimeout(makeRandomMove, 250);
     });
   } else {
-    // reset the pending move
     pendingMove = null;
 
-    // return the piece to the source square if the move was illegal
     return "snapback";
   }
 }
