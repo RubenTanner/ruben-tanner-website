@@ -291,3 +291,59 @@ form input[type="submit"]:hover {
     border-color: var(--foreground);
   }
 }
+
+/* Chessboard Container */
+#myBoard {
+  margin: 20px auto;
+  border: 2px solid var(--accent); /* Matches your site’s accent color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visuals */
+}
+
+/* Status and PGN Styles */
+#gameStatus {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: var(--foreground); /* Text color matching the theme */
+}
+
+#gamePGN {
+  font-family: "IBM Plex Mono", monospace; /* Matches your typography */
+  font-size: 1rem;
+  color: var(--foreground);
+  margin: 10px auto;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--accent); /* Matches your aesthetic */
+  background-color: var(--background); /* Theme background */
+  width: 90%;
+  max-width: 400px;
+  border-radius: 5px;
+}
+
+/* Additional Styling for the Board */
+#myBoard .circle {
+  border-radius: 50%; /* Makes the move indicators circular */
+  width: 15%; /* Adjust size of the move indicators */
+  height: 15%;
+  background-color: rgba(255, 0, 0, 0.6); /* Red circles for valid moves */
+  position: absolute;
+  pointer-events: none; /* Prevent interaction */
+  transform: translate(-50%, -50%); /* Center the circle */
+}
+
+@media (max-width: 480px) {
+  #myBoard {
+    width: 300px; /* Adjust board size for smaller screens */
+    height: 300px;
+  }
+
+  #gamePGN {
+    font-size: 0.9rem; /* Reduce PGN text size for smaller screens */
+    width: 95%;
+  }
+
+  #gameStatus {
+    font-size: 1rem;
+  }
+}

@@ -28,6 +28,24 @@
     <meta property="og:type" content="website" />
 
     <script defer type="module" src="assets/script.js"></script>
+    <!-- the chess stuff -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@chrisoakman/chessboard2@0.5.0/dist/chessboard2.min.css"
+      integrity="sha384-47VeTDpmy4yT21gKPXQcLQYQZwlmz27gEH5NTrOmTk3G/SGvMyltclOW/Q8uE+sL"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.js"
+      integrity="sha384-8sJV/krC8iV2g7t0PolQxFVckDtxhfM5gNHNAFPG2ZS/bScudOjfsB8ewhG2xle8"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/@chrisoakman/chessboard2@0.5.0/dist/chessboard2.min.js"
+      integrity="sha384-/KwQCjA1GWovZNV3QDVtvSMDzO4reGgarF/RqHipr7hIUElH3r5zNl9WEPPOBRIF"
+      crossorigin="anonymous"
+    ></script>
+    <script defer type="module" src="assets/chess.js"></script>
   </head>
   <body style="padding-bottom: 5%">
     <div class="container">
@@ -182,6 +200,13 @@
               >
             </div>
           </div>
+        </section>
+        <section id-="mini-chess">
+          <h2>Bored? How about a game of chess?</h2>
+          <div id="myBoard" style="width: 400px"></div>
+          <p id="gameStatus"></p>
+          <h4>Game PGN:</h4>
+          <div id="gamePGN" style="font-family: monospace"></div>
         </section>
         <section id="contact">
           <h2>Contact Me</h2>
