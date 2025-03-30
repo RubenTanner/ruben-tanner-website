@@ -1,22 +1,15 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
-const http = require("http");
 const subdomain = require("express-subdomain");
 const app = express();
 
+app.set("trust proxy", true); // So Express knows it's behind Nginx
+
 app.use(express.json());
-
-//this does all my SSL stuff
-const sslOptions = {
-  key: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/ruben-tanner.uk/fullchain.pem"),
-};
-
 app.use(express.static(path.join(__dirname, "public")));
 
-// Mock database for blog posts TODO replace with a real database
+// Mock database for blog posts
 const blogDB = path.join(__dirname, "blog-posts.json");
 if (!fs.existsSync(blogDB)) fs.writeFileSync(blogDB, JSON.stringify([]));
 
@@ -28,7 +21,7 @@ function savePosts(posts) {
   fs.writeFileSync(blogDB, JSON.stringify(posts, null, 2));
 }
 
-// Subdomains stuff
+// Subdomain routers
 const blogRouter = express.Router();
 const adminRouter = express.Router();
 
@@ -38,22 +31,16 @@ adminRouter.get("/", (req, res) => res.send("Admin panel"));
 app.use(subdomain("blog", blogRouter));
 app.use(subdomain("admin", adminRouter));
 
-// Route to list all blog posts
-app.get("/blog", (req, res) => {
-  const posts = getPosts();
-  res.send(posts);
-});
+// Blog routes
+app.get("/blog", (req, res) => res.send(getPosts()));
 
-// Route to serve a single blog post
 app.get("/blog/:id", (req, res) => {
-  const posts = getPosts();
-  const post = posts.find((p) => p.id === req.params.id);
+  const post = getPosts().find((p) => p.id === req.params.id);
   if (!post)
     return res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
   res.send(post);
 });
 
-// Admin route to create a blog post
 app.post("/admin/blog", (req, res) => {
   const { title, content } = req.body;
   if (!title || !content)
@@ -68,7 +55,7 @@ app.post("/admin/blog", (req, res) => {
   res.status(201).send(newPost);
 });
 
-// Middleware to count views for a blog post
+// Blog view counter
 app.use("/blog/:id", (req, res, next) => {
   const posts = getPosts();
   const post = posts.find((p) => p.id === req.params.id);
@@ -79,20 +66,13 @@ app.use("/blog/:id", (req, res, next) => {
   next();
 });
 
-// Catch-all for 404 errors
+// 404 fallback
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
-// HTTP to HTTPS redirection
-http
-  .createServer((req, res) => {
-    res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
-    res.end();
-  })
-  .listen(80);
-
-// Start the HTTPS server
-https.createServer(sslOptions, app).listen(443, () => {
-  console.log("HTTPS Server running on port 443");
+// 🟢 Start on port 3001 for Nginx reverse proxy
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Express server running on port ${PORT}`);
 });
