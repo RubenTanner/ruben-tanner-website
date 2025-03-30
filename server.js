@@ -4,7 +4,8 @@ const path = require("path");
 const subdomain = require("express-subdomain");
 const app = express();
 
-app.set("trust proxy", true); // Since we're behind Nginx
+app.set("trust proxy", true); // So Express knows it's behind Nginx
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -20,7 +21,7 @@ function savePosts(posts) {
   fs.writeFileSync(blogDB, JSON.stringify(posts, null, 2));
 }
 
-// Subdomains
+// Subdomain routers
 const blogRouter = express.Router();
 const adminRouter = express.Router();
 
@@ -30,6 +31,7 @@ adminRouter.get("/", (req, res) => res.send("Admin panel"));
 app.use(subdomain("blog", blogRouter));
 app.use(subdomain("admin", adminRouter));
 
+// Blog routes
 app.get("/blog", (req, res) => res.send(getPosts()));
 
 app.get("/blog/:id", (req, res) => {
@@ -53,6 +55,7 @@ app.post("/admin/blog", (req, res) => {
   res.status(201).send(newPost);
 });
 
+// Blog view counter
 app.use("/blog/:id", (req, res, next) => {
   const posts = getPosts();
   const post = posts.find((p) => p.id === req.params.id);
@@ -63,9 +66,13 @@ app.use("/blog/:id", (req, res, next) => {
   next();
 });
 
+// 404 fallback
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
+// 🟢 Start on port 3001 for Nginx reverse proxy
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Express server running on port ${PORT}`);
+});
