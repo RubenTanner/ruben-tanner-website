@@ -754,6 +754,20 @@ p {
   font-size: 1.6rem;
 }
 
+/* Add this to your CSS file, near the project card styles */
+.project-disclaimer {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.project-disclaimer i {
+  margin-right: 0.5rem;
+  color: var(--accent);
+}
+
 /* Chess section */
 .chess-intro {
   text-align: center;

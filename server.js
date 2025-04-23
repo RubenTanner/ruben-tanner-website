@@ -13,7 +13,7 @@ app.use(
   session({
     secret: process.env.ADMIN_PASSWORD || "default_secret",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialised: false,
     cookie: { secure: false, maxAge: 3600000 }, // 1 hour
   })
 );
