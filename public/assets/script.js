@@ -1,38 +1,42 @@
 //welcome text
 document.addEventListener("DOMContentLoaded", () => {
   const typewriterElement = document.querySelector("#typewriter-heading");
-  const text = "Hey! Welcome to the party";
-  typewriterElement.innerHTML = `<span class="typewriter">${text}</span>`;
+  if (typewriterElement) {
+    const text = "Hey! Welcome to the party";
+    typewriterElement.innerHTML = `<span class="typewriter">${text}</span>`;
 
-  // Adjust font size based on screen width
-  function adjustFontSize() {
-    const screenWidth = window.innerWidth;
-    const typewriter = document.querySelector(".typewriter");
+    // Adjust font size based on screen width
+    function adjustFontSize() {
+      const screenWidth = window.innerWidth;
+      const typewriter = document.querySelector(".typewriter");
 
-    if (screenWidth <= 480) {
-      typewriter.style.fontSize = "24px";
-    } else if (screenWidth <= 768) {
-      typewriter.style.fontSize = "28px";
-    } else {
-      typewriter.style.fontSize = "55px";
+      if (screenWidth <= 480) {
+        typewriter.style.fontSize = "24px";
+      } else if (screenWidth <= 768) {
+        typewriter.style.fontSize = "28px";
+      } else {
+        typewriter.style.fontSize = "55px";
+      }
     }
+    // Initial adjustment
+    adjustFontSize();
+    // Adjust on window resize
+    window.addEventListener("resize", adjustFontSize);
   }
-  // Initial adjustment
-  adjustFontSize();
-  // Adjust on window resize
-  window.addEventListener("resize", adjustFontSize);
 });
 
 // clear form when submitted
-const contactFormOld = document.querySelector("#contact form"); // Renamed to avoid conflict
-const responseMessageOld = document.querySelector("#responseMessage"); // Renamed to avoid conflict
+const contactFormOld = document.querySelector("#contact form");
+const responseMessageOld = document.querySelector("#responseMessage");
 
-contactFormOld.addEventListener("submit", (event) => {
-  setTimeout(() => {
-    contactFormOld.reset();
-    responseMessageOld.textContent = "Oh cool! I'll get back to you soon :)";
-  }, 500); // give it a little bit for slow submissions
-});
+if (contactFormOld) {
+  contactFormOld.addEventListener("submit", (event) => {
+    setTimeout(() => {
+      contactFormOld.reset();
+      responseMessageOld.textContent = "Oh cool! I'll get back to you soon :)";
+    }, 500); // give it a little bit for slow submissions
+  });
+}
 
 // DOM Elements
 const body = document.querySelector("body");
@@ -59,6 +63,8 @@ let isDeleting = false;
 let isWaiting = false;
 
 function typeEffect() {
+  if (!typewriterText) return;
+
   const currentPhrase = phrases[phraseIndex];
 
   if (isWaiting) {
@@ -96,81 +102,116 @@ setTimeout(typeEffect, 1000);
 
 // Navbar scroll effect
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
   }
 });
 
 // Mobile menu toggle
-menuToggle.addEventListener("click", () => {
-  menuToggle.classList.toggle("active");
-  navLinks.classList.toggle("active");
-});
-
-// Close mobile menu when clicking a link
-document.querySelectorAll(".nav-link").forEach((link) => {
-  link.addEventListener("click", () => {
-    menuToggle.classList.remove("active");
-    navLinks.classList.remove("active");
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    navLinks.classList.toggle("active");
   });
-});
 
-// Theme toggle
-themeToggle.addEventListener("click", () => {
-  body.classList.toggle("dark-theme");
+  // Close mobile menu when clicking a link
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuToggle.classList.remove("active");
+      navLinks.classList.remove("active");
+    });
+  });
+}
 
-  // Save theme preference
-  const isDarkTheme = body.classList.contains("dark-theme");
-  localStorage.setItem("darkTheme", isDarkTheme);
-});
+// Theme toggle - Updated to check system preference first
+function initialiseTheme() {
+  // Check if there's a saved preference
+  const savedTheme = localStorage.getItem("darkTheme");
 
-// Check for saved theme preference
-const savedTheme = localStorage.getItem("darkTheme");
-if (savedTheme === "true") {
-  body.classList.add("dark-theme");
+  if (savedTheme === "true") {
+    // User previously selected dark theme
+    document.body.classList.add("dark-theme");
+  } else if (savedTheme === "false") {
+    // User previously selected light theme
+    document.body.classList.remove("dark-theme");
+  } else {
+    // No saved preference, check system preference
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      document.body.classList.add("dark-theme");
+      localStorage.setItem("darkTheme", "true");
+    } else {
+      document.body.classList.remove("dark-theme");
+      localStorage.setItem("darkTheme", "false");
+    }
+  }
+}
+
+// initialise theme on page load
+initialiseTheme();
+
+// Theme toggle button
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+
+    // Save theme preference
+    const isDarkTheme = document.body.classList.contains("dark-theme");
+    localStorage.setItem("darkTheme", isDarkTheme);
+  });
 }
 
 // Custom cursor
-document.addEventListener("mousemove", (e) => {
-  cursor.style.opacity = "1";
-  cursor.style.left = `${e.clientX}px`;
-  cursor.style.top = `${e.clientY}px`;
+if (cursor) {
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.opacity = "1";
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
 
-  // Scale effect on hoverable elements
-  const hoverable = e.target.closest("a, button, .theme-toggle, .menu-toggle");
-  if (hoverable) {
-    cursor.style.transform = "translate(-50%, -50%) scale(1.5)";
-  } else {
-    cursor.style.transform = "translate(-50%, -50%) scale(1)";
+    // Scale effect on hoverable elements
+    const hoverable = e.target.closest(
+      "a, button, .theme-toggle, .menu-toggle"
+    );
+    if (hoverable) {
+      cursor.style.transform = "translate(-50%, -50%) scale(1.5)";
+    } else {
+      cursor.style.transform = "translate(-50%, -50%) scale(1)";
+    }
+  });
+
+  document.addEventListener("mouseleave", () => {
+    cursor.style.opacity = "0";
+  });
+
+  // Hide cursor on mobile devices
+  if (window.innerWidth <= 768) {
+    cursor.style.display = "none";
   }
-});
-
-document.addEventListener("mouseleave", () => {
-  cursor.style.opacity = "0";
-});
-
-// Hide cursor on mobile devices
-if (window.innerWidth <= 768) {
-  cursor.style.display = "none";
 }
 
 // Form submission
-contactForm.addEventListener("submit", (event) => {
-  // Let the form submit normally to Formspree
-  // But clear the form and show a message after a delay
-  setTimeout(() => {
-    contactForm.reset();
-    responseMessage.textContent =
-      "Thanks for reaching out! I'll get back to you soon.";
-
-    // Clear the message after 5 seconds
+if (contactForm && responseMessage) {
+  contactForm.addEventListener("submit", (event) => {
+    // Let the form submit normally to Formspree
+    // But clear the form and show a message after a delay
     setTimeout(() => {
-      responseMessage.textContent = "";
-    }, 5000);
-  }, 500);
-});
+      contactForm.reset();
+      responseMessage.textContent =
+        "Thanks for reaching out! I'll get back to you soon.";
+
+      // Clear the message after 5 seconds
+      setTimeout(() => {
+        responseMessage.textContent = "";
+      }, 5000);
+    }, 500);
+  });
+}
 
 // Scroll reveal animation
 const revealElements = document.querySelectorAll(".section");

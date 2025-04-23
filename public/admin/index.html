@@ -161,16 +161,29 @@
 
       // Theme toggle
       themeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark-theme");
+        document.body.classList.toggle("dark-theme");
         // Save theme preference
-        const isDarkTheme = body.classList.contains("dark-theme");
+        const isDarkTheme = document.body.classList.contains("dark-theme");
         localStorage.setItem("darkTheme", isDarkTheme);
       });
 
       // Check for saved theme preference
       const savedTheme = localStorage.getItem("darkTheme");
       if (savedTheme === "true") {
-        body.classList.add("dark-theme");
+        document.body.classList.add("dark-theme");
+      } else if (savedTheme === "false") {
+        document.body.classList.remove("dark-theme");
+      } else {
+        // Check system preference if no saved preference
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          document.body.classList.add("dark-theme");
+          localStorage.setItem("darkTheme", "true");
+        } else {
+          localStorage.setItem("darkTheme", "false");
+        }
       }
 
       // Custom cursor
