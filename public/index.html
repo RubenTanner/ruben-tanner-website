@@ -3,29 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ruben Tanner - Cool Dude, Even Cooler Website</title>
+    <title>Ruben Tanner - Software Engineer</title>
     <link rel="stylesheet" href="/assets/main.css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
     <script
       src="https://kit.fontawesome.com/bb487193c2.js"
       crossorigin="anonymous"
     ></script>
 
     <!-- Meta Tags for SEO -->
-    <meta name="description" content="Super cool dude doing cool things." />
-    <meta name="keywords" content="keyword, keyword, evenMoreKeywords" />
+    <meta
+      name="description"
+      content="Software Engineer & Tech Enthusiast. Crafting digital experiences with clean code and creative solutions."
+    />
+    <meta
+      name="keywords"
+      content="software engineer, web development, portfolio, ruben tanner"
+    />
     <meta name="author" content="Ruben Tanner" />
 
     <!-- Open Graph Meta Tags for Social Media -->
-    <meta
-      property="og:title"
-      content="Ruben Tanner - Cool Dude, Even Cooler Website"
-    />
+    <meta property="og:title" content="Ruben Tanner - Software Engineer" />
     <meta
       property="og:description"
-      content="Super cool dude doing cool things."
+      content="Software Engineer & Tech Enthusiast. Crafting digital experiences with clean code and creative solutions."
     />
     <meta property="og:url" content="ruben-tanner.uk" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/images/og-image.png" />
 
     <script defer type="module" src="assets/script.js"></script>
     <!-- the chess stuff -->
@@ -47,43 +52,94 @@
     ></script>
     <script defer type="module" src="assets/chess.js"></script>
   </head>
-  <body style="padding-bottom: 5%">
-    <div class="container">
-      <header id="welcome">
-        <h1 id="typewriter-heading"></h1>
-      </header>
-      <nav>
-        <ul>
-          <li>
-            <a href="https://github.com/rubentanner/">
-              <i class="fa-brands fa-github" aria-hidden="true"></i>/rubentanner
+  <body>
+    <div class="noise"></div>
+    <div class="cursor"></div>
+
+    <header class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="glitch" data-text="Ruben Tanner">Ruben Tanner</h1>
+          <div class="typewriter-container">
+            <span id="typewriter-text"></span>
+            <span class="cursor-blink">|</span>
+          </div>
+          <div class="social-links">
+            <a
+              href="https://github.com/rubentanner/"
+              class="social-link"
+              aria-label="GitHub"
+            >
+              <i class="fa-brands fa-github"></i>
             </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/ruben-tanner-75a03321a/">
-              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>/Ruben
-              Tanner
+            <a
+              href="https://www.linkedin.com/in/ruben-tanner-75a03321a/"
+              class="social-link"
+              aria-label="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin"></i>
             </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/phat.yikes_31">
-              <i class="fa-brands fa-instagram" aria-hidden="true"></i
-              >/phat.yikes_31
+            <a
+              href="https://www.instagram.com/phat.yikes_31"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              <i class="fa-brands fa-instagram"></i>
             </a>
-          </li>
-          <li>
-            <a href="https://discordapp.com/users/758775356848078848">
-              <i class="fa-brands fa-discord" aria-hidden="true"></i>@phatyikes
+            <a
+              href="https://discordapp.com/users/758775356848078848"
+              class="social-link"
+              aria-label="Discord"
+            >
+              <i class="fa-brands fa-discord"></i>
             </a>
-          </li>
-        </ul>
-      </nav>
-      <main>
-        <section id="about">
-          <h2>About Me</h2>
-          <div class="about-container">
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <div class="arrow">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">RT</div>
+        <div class="nav-links">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#portfolio" class="nav-link">Projects</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="#mini-chess" class="nav-link">Chess</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="theme-toggle">
+          <i class="fa-solid fa-sun"></i>
+          <i class="fa-solid fa-moon"></i>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section id="about" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">About Me</h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="about-content">
             <div class="about-text">
-              <p>
+              <p class="lead">
                 I'm Ruben, a third-year software engineering student at The
                 University of Portsmouth.
               </p>
@@ -92,176 +148,353 @@
                 like this) and API/backend work to Technology Project Management
                 and more.
               </p>
+              <p>
+                My passion lies in creating efficient, elegant solutions to
+                complex problems. When I'm not coding, you might find me playing
+                chess or exploring new technologies.
+              </p>
+            </div>
+            <div class="skills">
+              <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-tags">
+                  <span class="skill-tag">HTML</span>
+                  <span class="skill-tag">CSS</span>
+                  <span class="skill-tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h3>Backend</h3>
+                <div class="skill-tags">
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Express</span>
+                  <span class="skill-tag">APIs</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h3>Other</h3>
+                <div class="skill-tags">
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">Project Management</span>
+                  <span class="skill-tag">Problem Solving</span>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-        <section id="portfolio">
-          <h2>Projects</h2>
-          <div class="project">
-            <div class="project-info">
-              <h3>Destroyers Strength &amp; Conditioning Tracker</h3>
-              <p>
-                I saw the need to make a tracker for my university American
-                Football Team (The Portsmouth Destroyers) to help accurately
-                track our team's strength and development as we started to
-                prepare for our upcoming season, the project helped us supply
-                conditioning programs tailored to specific people instead of
-                generalising everything.
-              </p>
-              <p>
-                Originally I hosted this project right here! On this website
-                while it was in use, but as our season progressed it was being
-                used less and less as coaches supplied positional programmes as
-                everyone gained a similar high level.
-              </p>
-              <p>
-                While basic, the project was really good fun! And forced me to
-                embrace website development as, well, I couldn't have this
-                domain and not host a personal website, along side the tracker.
-              </p>
-              <a
-                href="https://github.com/RubenTanner/Destroyers-Strength-Tracker"
-                class="view-button"
-              >
-                <i class="fa-brands fa-github" aria-hidden="true"></i>View
-                Project on GitHub
-              </a>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-info">
-              <h3>This Website!</h3>
-              <p>
-                This site is more than just a portfolio. It's a sandbox where I
-                can play with ideas, test new concepts, and showcase the
-                projects I'm most excited about. Built from scratch, it is a
-                reflection of my love for clean design and efficient code.
-              </p>
-              <p>
-                While it's still a work in progress (aren't all good projects?),
-                I'm constantly updating it to highlight what I'm working on. Or
-                just want to try out!
-              </p>
-              <p>
-                If you're curious about the nuts and bolts, this site runs on
-                HTML, CSS, and a sprinkle of JavaScript with express running in
-                the backend for some basic server goodness.
-              </p>
-              <a
-                href="https://github.com/RubenTanner/ruben-tanner-website"
-                class="view-button"
-              >
-                <i class="fa-brands fa-github" aria-hidden="true"></i>View
-                Project on GitHub
-              </a>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-info">
-              <h3>ARYAN - A Bot Born Out of Frustration</h3>
-              <p>
-                Every once in a while, something annoys you so much that you
-                just have to build a solution for it. That’s exactly how ARYAN
-                came to life. A Discord server I moderate has been plagued by a
-                persistent ban evader who just keeps coming back with freshly
-                minted accounts, sometimes multiple in one evening.
-              </p>
-              <p>
-                After the umpteenth time banning them, I decided enough was
-                enough—and ARYAN was born.
-              </p>
-              <p>
-                The idea behind ARYAN is simple: he is a bouncer for your
-                server. It automatically checks the age of new accounts when
-                they join and, if they don’t meet your server’s minimum age
-                requirement, times them out until they do. It’s an elegant way
-                to deal with spammers and ban evaders without putting extra
-                strain on moderators.
-              </p>
-              <p>
-                What makes ARYAN a bit more personal is the name itself. It’s a
-                nod to the person who inspired its creation—someone who made
-                moderating unnecessarily difficult but ultimately led to
-                something productive.
-              </p>
-              <a
-                href="https://github.com/RubenTanner/ARYAN"
-                class="view-button"
-              >
-                <i class="fa-brands fa-github" aria-hidden="true"></i>View
-                Project on GitHub
-              </a>
-              <a
-                href="https://top.gg/bot/1326972276343570453"
-                class="view-button"
-              >
-                <i class="fa-brands fa-discord" aria-hidden="true"></i>See it on
-                Top.gg</a
-              >
-            </div>
-          </div>
-        </section>
-        <section id-="mini-chess">
-          <h2>Bored? How about a game of chess?</h2>
-          <div id="myBoard"></div>
-          <p id="gameStatus"></p>
-          <h4>Game PGN:</h4>
-          <div id="gamePGN" style="font-family: monospace"></div>
-        </section>
-        <section id="contact">
-          <h2>Contact Me</h2>
-          <form action="https://formspree.io/f/mqaagedp" method="POST">
-            <label>
-              Your email:
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Email goes here"
-              />
-            </label>
-            <label>
-              Your message:
-              <textarea
-                name="message"
-                rows="6"
-                required
-                maxlength="450"
-                placeholder="Give me a shout! What do you want to talk about? Tell me a joke maybe?"
-              ></textarea>
-            </label>
-            <button type="submit" class="view-button">Send</button>
-          </form>
-          <div id="responseMessage"></div>
-        </section>
-      </main>
-      <footer>
-        <p>&copy; 2025 Ruben Tanner</p>
-        <div class="social-media">
-          <a href="https://github.com/rubentanner/">
-            <i class="fa-brands fa-github" aria-hidden="true"></i>/rubentanner
-          </a>
-          <a href="https://www.linkedin.com/in/ruben-tanner-75a03321a/">
-            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>/Ruben
-            Tanner
-          </a>
-          <a href="https://www.instagram.com/phat.yikes_31">
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i
-            >/phat.yikes_31
-          </a>
-          <a href="https://discordapp.com/users/758775356848078848">
-            <i class="fa-brands fa-discord" aria-hidden="true"></i>@phatyikes
-          </a>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      <section id="portfolio" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="project-content">
+                <h3 class="project-title">
+                  Destroyers Strength & Conditioning Tracker
+                </h3>
+                <p class="project-description">
+                  A custom tracker for my university American Football Team to
+                  help accurately track our team's strength and development as
+                  we prepared for our upcoming season.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">HTML</span>
+                  <span class="project-tag">CSS</span>
+                  <span class="project-tag">JavaScript</span>
+                </div>
+                <a
+                  href="https://github.com/RubenTanner/Destroyers-Strength-Tracker"
+                  class="project-link"
+                >
+                  <i class="fa-brands fa-github"></i> View on GitHub
+                </a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-content">
+                <h3 class="project-title">This Website!</h3>
+                <p class="project-description">
+                  This site is more than just a portfolio. It's a sandbox where
+                  I can play with ideas, test new concepts, and showcase the
+                  projects I'm most excited about.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">HTML</span>
+                  <span class="project-tag">CSS</span>
+                  <span class="project-tag">JavaScript</span>
+                  <span class="project-tag">Express</span>
+                </div>
+                <a
+                  href="https://github.com/RubenTanner/ruben-tanner-website"
+                  class="project-link"
+                >
+                  <i class="fa-brands fa-github"></i> View on GitHub
+                </a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-content">
+                <h3 class="project-title">ARYAN - Discord Moderation Bot</h3>
+                <p class="project-description">
+                  A Discord bot that automatically checks the age of new
+                  accounts when they join and times them out if they don't meet
+                  your server's minimum age requirement.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Node.js</span>
+                  <span class="project-tag">Discord.js</span>
+                  <span class="project-tag">Bot</span>
+                </div>
+                <div class="project-links">
+                  <a
+                    href="https://github.com/RubenTanner/ARYAN"
+                    class="project-link"
+                  >
+                    <i class="fa-brands fa-github"></i> View on GitHub
+                  </a>
+                  <a
+                    href="https://top.gg/bot/1326972276343570453"
+                    class="project-link"
+                  >
+                    <i class="fa-brands fa-discord"></i> See on Top.gg
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- New Blog Section -->
+      <section id="blog-preview" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">From My Blog</h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="blog-preview-content">
+            <p class="blog-intro">
+              I occasionally write about tech, projects I'm working on, and
+              other random thoughts. Check out my latest posts below or visit
+              the full blog for more.
+            </p>
+            <div id="latest-posts" class="blog-preview-grid">
+              <!-- Latest posts will be loaded here -->
+              <div class="loading">Loading latest posts...</div>
+            </div>
+            <div class="blog-cta">
+              <a href="/blog" class="view-button">
+                <span>View All Posts</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="mini-chess" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Chess Challenge</h2>
+            <div class="section-line"></div>
+          </div>
+          <p class="chess-intro">
+            Bored? How about a quick game of chess? Make your move and the
+            computer will respond.
+          </p>
+          <p class="chess-disclaimer">
+            <i class="fa-solid fa-info-circle"></i>
+            Note: The computer currently makes random moves as it doesn't have a
+            chess engine... yet! Consider it a fun challenge rather than a
+            serious opponent.
+          </p>
+          <div class="chess-container">
+            <div id="myBoard"></div>
+            <div class="chess-info">
+              <p id="gameStatus" class="game-status"></p>
+              <div class="pgn-container">
+                <h4>Game PGN:</h4>
+                <div id="gamePGN" class="game-pgn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="contact-container">
+            <div class="contact-info">
+              <p class="contact-text">
+                Have a question or want to work together? Feel free to reach
+                out!
+              </p>
+              <div class="contact-links">
+                <a href="https://github.com/rubentanner/" class="contact-link">
+                  <i class="fa-brands fa-github"></i> /rubentanner
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/ruben-tanner-75a03321a/"
+                  class="contact-link"
+                >
+                  <i class="fa-brands fa-linkedin"></i> /Ruben Tanner
+                </a>
+                <a
+                  href="https://discordapp.com/users/758775356848078848"
+                  class="contact-link"
+                >
+                  <i class="fa-brands fa-discord"></i> @phatyikes
+                </a>
+              </div>
+            </div>
+            <form
+              class="contact-form"
+              action="https://formspree.io/f/mqaagedp"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="email@example.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  required
+                  maxlength="450"
+                  placeholder="What's on your mind?"
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-btn">
+                <span>Send Message</span>
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+          <div id="responseMessage" class="response-message"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">RT</div>
+          <div class="footer-text">
+            <p>&copy; 2025 Ruben Tanner. All rights reserved.</p>
+            <p>
+              Crafted with <i class="fa-solid fa-heart"></i> and pure
+              HTML/CSS/JS
+            </p>
+          </div>
+          <div class="footer-social">
+            <a
+              href="https://github.com/rubentanner/"
+              class="social-link"
+              aria-label="GitHub"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ruben-tanner-75a03321a/"
+              class="social-link"
+              aria-label="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/phat.yikes_31"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a
+              href="https://discordapp.com/users/758775356848078848"
+              class="social-link"
+              aria-label="Discord"
+            >
+              <i class="fa-brands fa-discord"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
     <script>
       kofiWidgetOverlay.draw("phatyikes", {
         type: "floating-chat",
         "floating-chat.donateButton.text": "Tip Me",
-        "floating-chat.donateButton.background-color": "#5bc0de",
-        "floating-chat.donateButton.text-color": "#323842",
+        "floating-chat.donateButton.background-color": "#4169e1",
+        "floating-chat.donateButton.text-color": "#ffffff",
+      });
+    </script>
+    <script>
+      // Load latest blog posts for the homepage
+      document.addEventListener("DOMContentLoaded", async () => {
+        const latestPostsContainer = document.getElementById("latest-posts");
+        if (latestPostsContainer) {
+          try {
+            const response = await fetch("/api/blog");
+            const posts = await response.json();
+
+            if (posts.length === 0) {
+              latestPostsContainer.innerHTML =
+                '<div class="blog-empty">No blog posts yet. Check back soon!</div>';
+              return;
+            }
+
+            // Sort posts by date (newest first) and take the latest 3
+            const latestPosts = posts
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .slice(0, 3);
+
+            // Render posts
+            latestPostsContainer.innerHTML = latestPosts
+              .map(
+                (post) => `
+                <div class="blog-preview-card">
+                  <h3 class="blog-preview-title">${post.title}</h3>
+                  <div class="blog-meta">
+                    <span><i class="fa-regular fa-calendar"></i> ${new Date(
+                      post.date
+                    ).toLocaleDateString()}</span>
+                  </div>
+                  <p class="blog-preview-excerpt">
+                    ${post.summary || post.content.substring(0, 120) + "..."}
+                  </p>
+                  <a href="/blog/${
+                    post.id
+                  }" class="blog-preview-link">Read More</a>
+                </div>
+              `
+              )
+              .join("");
+          } catch (error) {
+            console.error("Error fetching blog posts:", error);
+            latestPostsContainer.innerHTML =
+              '<div class="error-message">Error loading posts. Please try again later.</div>';
+          }
+        }
       });
     </script>
   </body>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Post - Ruben Tanner</title>
+    <link rel="stylesheet" href="/assets/main.css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+    <script
+      src="https://kit.fontawesome.com/bb487193c2.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Meta Tags for SEO -->
+    <meta
+      name="description"
+      content="Blog post by Ruben Tanner - Software Engineer & Tech Enthusiast."
+    />
+    <meta
+      name="keywords"
+      content="software engineer, web development, blog, ruben tanner"
+    />
+    <meta name="author" content="Ruben Tanner" />
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Blog Post - Ruben Tanner" />
+    <meta
+      property="og:description"
+      content="Blog post by Ruben Tanner - Software Engineer & Tech Enthusiast."
+    />
+    <meta property="og:url" content="ruben-tanner.uk/blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="/assets/images/og-image.png" />
+
+    <script defer type="module" src="/assets/script.js"></script>
+    <script defer src="/assets/blog.js"></script>
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="cursor"></div>
+
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">RT</div>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/#about" class="nav-link">About</a>
+          <a href="/#portfolio" class="nav-link">Projects</a>
+          <a href="/blog" class="nav-link active">Blog</a>
+          <a href="/#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="theme-toggle">
+          <i class="fa-solid fa-sun"></i>
+          <i class="fa-solid fa-moon"></i>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <div class="blog-container">
+            <!-- Blog post will be loaded here via JavaScript -->
+            <div class="loading">Loading post...</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">RT</div>
+          <div class="footer-text">
+            <p>&copy; 2025 Ruben Tanner. All rights reserved.</p>
+            <p>
+              Crafted with <i class="fa-solid fa-heart"></i> and pure
+              HTML/CSS/JS
+            </p>
+          </div>
+          <div class="footer-social">
+            <a
+              href="https://github.com/rubentanner/"
+              class="social-link"
+              aria-label="GitHub"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ruben-tanner-75a03321a/"
+              class="social-link"
+              aria-label="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/phat.yikes_31"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a
+              href="https://discordapp.com/users/758775356848078848"
+              class="social-link"
+              aria-label="Discord"
+            >
+              <i class="fa-brands fa-discord"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script>
+      kofiWidgetOverlay.draw("phatyikes", {
+        type: "floating-chat",
+        "floating-chat.donateButton.text": "Tip Me",
+        "floating-chat.donateButton.background-color": "#4169e1",
+        "floating-chat.donateButton.text-color": "#ffffff",
+      });
+    </script>
+  </body>
+</html>
