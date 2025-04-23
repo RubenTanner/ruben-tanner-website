@@ -75,11 +75,18 @@ app.get("/api/blog/:id", (req, res) => {
   const post = getPosts().find((p) => p.id === req.params.id);
   if (!post) return res.status(404).json({ error: "Post not found" });
 
-  // Increment view count
-  post.views = (post.views || 0) + 1;
-  savePosts(getPosts());
-
   res.json(post);
+});
+
+// Middleware to count views for a blog post
+app.use("/blog/:id", (req, res, next) => {
+  const posts = getPosts();
+  const post = posts.find((p) => p.id === req.params.id);
+  if (post) {
+    post.views = (post.views || 0) + 1;
+    savePosts(posts);
+  }
+  next();
 });
 
 // Admin routes for blog management (protected)
