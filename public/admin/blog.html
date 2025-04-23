@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Admin - Ruben Tanner</title>
+    <link rel="stylesheet" href="/assets/main.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/images/site.webmanifest" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+
+    <script
+      src="https://kit.fontawesome.com/bb487193c2.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .admin-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .admin-form {
+        background-color: var(--surface);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 3rem;
+        box-shadow: var(--card-shadow);
+      }
+
+      .admin-posts {
+        margin-top: 4rem;
+      }
+
+      .admin-post {
+        background-color: var(--surface);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 2rem;
+        box-shadow: var(--card-shadow);
+      }
+
+      .admin-post-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .admin-actions {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .admin-btn {
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-size: 1.4rem;
+      }
+
+      .edit-btn {
+        background-color: var(--accent);
+        color: white;
+      }
+
+      .delete-btn {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      .tag-input {
+        margin-bottom: 1rem;
+      }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .tag-item {
+        background-color: rgba(65, 105, 225, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .tag-remove {
+        cursor: pointer;
+        color: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="cursor"></div>
+
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">RT</div>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/admin/blog.html" class="nav-link active">Admin</a>
+        </div>
+        <div class="theme-toggle">
+          <i class="fa-solid fa-sun"></i>
+          <i class="fa-solid fa-moon"></i>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Blog Admin</h1>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="admin-container">
+            <div class="admin-form">
+              <h2>Create New Post</h2>
+              <form id="blogForm">
+                <input type="hidden" id="postId" value="" />
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" id="title" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="summary">Summary</label>
+                  <textarea id="summary" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="content">Content</label>
+                  <textarea id="content" rows="10" required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="tagInput">Tags</label>
+                  <div class="tag-input">
+                    <input
+                      type="text"
+                      id="tagInput"
+                      placeholder="Add a tag and press Enter"
+                    />
+                  </div>
+                  <div class="tag-list" id="tagList"></div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span>Create Post</span>
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+
+                <button
+                  type="button"
+                  class="submit-btn"
+                  id="cancelBtn"
+                  style="
+                    display: none;
+                    background-color: #6c757d;
+                    margin-left: 1rem;
+                  "
+                >
+                  <span>Cancel</span>
+                  <i class="fa-solid fa-times"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="admin-posts">
+              <div class="admin-header">
+                <h2>Manage Posts</h2>
+                <button
+                  onclick="logout()"
+                  class="submit-btn"
+                  style="background-color: #6c757d"
+                >
+                  <span>Logout</span>
+                  <i class="fa-solid fa-sign-out-alt"></i>
+                </button>
+              </div>
+              <div id="postsList">
+                <!-- Posts will be loaded here -->
+                <div class="loading">Loading posts...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">RT</div>
+          <div class="footer-text">
+            <p>&copy; 2025 Ruben Tanner. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Check authentication status
+      checkAuthStatus();
+
+      // Check if user is authenticated
+      async function checkAuthStatus() {
+        try {
+          const response = await fetch("/api/auth/status");
+          const data = await response.json();
+
+          if (!data.isAuthenticated) {
+            // Not logged in, redirect to login page
+            window.location.href = "/admin/index.html";
+          }
+        } catch (error) {
+          console.error("Error checking auth status:", error);
+          window.location.href = "/admin/index.html";
+        }
+      }
+
+      // Logout function
+      async function logout() {
+        try {
+          await fetch("/api/auth/logout", { method: "POST" });
+          window.location.href = "/admin/index.html";
+        } catch (error) {
+          console.error("Error logging out:", error);
+        }
+      }
+      // DOM Elements
+      const body = document.querySelector("body");
+      const navbar = document.querySelector(".navbar");
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+      const themeToggle = document.querySelector(".theme-toggle");
+      const cursor = document.querySelector(".cursor");
+
+      // Blog form elements
+      const blogForm = document.getElementById("blogForm");
+      const postIdInput = document.getElementById("postId");
+      const titleInput = document.getElementById("title");
+      const summaryInput = document.getElementById("summary");
+      const contentInput = document.getElementById("content");
+      const tagInput = document.getElementById("tagInput");
+      const tagList = document.getElementById("tagList");
+      const submitBtn = document.getElementById("submitBtn");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const postsList = document.getElementById("postsList");
+
+      // Current tags
+      let currentTags = [];
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+
+      // Theme toggle
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+        // Save theme preference
+        const isDarkTheme = document.body.classList.contains("dark-theme");
+        localStorage.setItem("darkTheme", isDarkTheme);
+      });
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem("darkTheme");
+      if (savedTheme === "true") {
+        document.body.classList.add("dark-theme");
+      } else if (savedTheme === "false") {
+        document.body.classList.remove("dark-theme");
+      } else {
+        // Check system preference if no saved preference
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          document.body.classList.add("dark-theme");
+          localStorage.setItem("darkTheme", "true");
+        } else {
+          localStorage.setItem("darkTheme", "false");
+        }
+      }
+
+      // Custom cursor
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.opacity = "1";
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+
+        // Scale effect on hoverable elements
+        const hoverable = e.target.closest(
+          "a, button, .theme-toggle, .menu-toggle"
+        );
+        if (hoverable) {
+          cursor.style.transform = "translate(-50%, -50%) scale(1.5)";
+        } else {
+          cursor.style.transform = "translate(-50%, -50%) scale(1)";
+        }
+      });
+
+      document.addEventListener("mouseleave", () => {
+        cursor.style.opacity = "0";
+      });
+
+      // Hide cursor on mobile devices
+      if (window.innerWidth <= 768) {
+        cursor.style.display = "none";
+      }
+
+      // Tag input handling
+      tagInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const tag = tagInput.value.trim();
+          if (tag && !currentTags.includes(tag)) {
+            currentTags.push(tag);
+            renderTags();
+            tagInput.value = "";
+          }
+        }
+      });
+
+      function renderTags() {
+        tagList.innerHTML = currentTags
+          .map(
+            (tag) => `
+          <div class="tag-item">
+            <span>${tag}</span>
+            <span class="tag-remove" data-tag="${tag}">×</span>
+          </div>
+        `
+          )
+          .join("");
+
+        // Add event listeners to remove buttons
+        document.querySelectorAll(".tag-remove").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const tag = btn.getAttribute("data-tag");
+            currentTags = currentTags.filter((t) => t !== tag);
+            renderTags();
+          });
+        });
+      }
+
+      // Form submission
+      blogForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const postData = {
+          title: titleInput.value,
+          summary: summaryInput.value,
+          content: contentInput.value,
+          tags: currentTags,
+        };
+
+        try {
+          let response;
+
+          if (postIdInput.value) {
+            // Update existing post
+            response = await fetch(`/api/blog/${postIdInput.value}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            });
+          } else {
+            // Create new post
+            response = await fetch("/api/blog", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            });
+          }
+
+          if (response.ok) {
+            resetForm();
+            fetchPosts();
+            alert(
+              postIdInput.value
+                ? "Post updated successfully!"
+                : "Post created successfully!"
+            );
+          } else {
+            const error = await response.json();
+            alert(`Error: ${error.error || "Something went wrong"}`);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        }
+      });
+
+      // Reset form
+      function resetForm() {
+        postIdInput.value = "";
+        titleInput.value = "";
+        summaryInput.value = "";
+        contentInput.value = "";
+        currentTags = [];
+        renderTags();
+        submitBtn.innerHTML =
+          '<span>Create Post</span><i class="fa-solid fa-paper-plane"></i>';
+        cancelBtn.style.display = "none";
+      }
+
+      // Cancel edit
+      cancelBtn.addEventListener("click", resetForm);
+
+      // Fetch posts
+      async function fetchPosts() {
+        try {
+          const response = await fetch("/api/blog");
+          const posts = await response.json();
+
+          if (posts.length === 0) {
+            postsList.innerHTML =
+              '<div class="empty-message">No posts yet. Create your first post above!</div>';
+            return;
+          }
+
+          // Sort posts by date (newest first)
+          posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          postsList.innerHTML = posts
+            .map(
+              (post) => `
+            <div class="admin-post">
+              <div class="admin-post-header">
+                <h3>${post.title}</h3>
+                <div class="admin-actions">
+                  <button class="admin-btn edit-btn" data-id="${
+                    post.id
+                  }">Edit</button>
+                  <button class="admin-btn delete-btn" data-id="${
+                    post.id
+                  }">Delete</button>
+                </div>
+              </div>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> ${new Date(
+                  post.date
+                ).toLocaleDateString()}</span>
+                <span><i class="fa-regular fa-eye"></i> ${
+                  post.views || 0
+                } views</span>
+              </div>
+              <p>${post.summary || post.content.substring(0, 150) + "..."}</p>
+              <div class="blog-tags">
+                ${
+                  post.tags
+                    ? post.tags
+                        .map((tag) => `<span class="blog-tag">${tag}</span>`)
+                        .join("")
+                    : ""
+                }
+              </div>
+            </div>
+          `
+            )
+            .join("");
+
+          // Add event listeners to edit and delete buttons
+          document.querySelectorAll(".edit-btn").forEach((btn) => {
+            btn.addEventListener("click", () =>
+              editPost(btn.getAttribute("data-id"))
+            );
+          });
+
+          document.querySelectorAll(".delete-btn").forEach((btn) => {
+            btn.addEventListener("click", () =>
+              deletePost(btn.getAttribute("data-id"))
+            );
+          });
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+          postsList.innerHTML =
+            '<div class="error-message">Error loading posts. Please try again.</div>';
+        }
+      }
+
+      // Edit post
+      async function editPost(postId) {
+        try {
+          const response = await fetch(`/api/blog/${postId}`);
+          const post = await response.json();
+
+          postIdInput.value = post.id;
+          titleInput.value = post.title;
+          summaryInput.value = post.summary || "";
+          contentInput.value = post.content;
+          currentTags = post.tags || [];
+          renderTags();
+
+          submitBtn.innerHTML =
+            '<span>Update Post</span><i class="fa-solid fa-save"></i>';
+          cancelBtn.style.display = "inline-flex";
+
+          // Scroll to form
+          blogForm.scrollIntoView({ behavior: "smooth" });
+        } catch (error) {
+          console.error("Error fetching post:", error);
+          alert("Error loading post. Please try again.");
+        }
+      }
+
+      // Delete post
+      async function deletePost(postId) {
+        if (
+          !confirm(
+            "Are you sure you want to delete this post? This action cannot be undone."
+          )
+        ) {
+          return;
+        }
+
+        try {
+          const response = await fetch(`/api/blog/${postId}`, {
+            method: "DELETE",
+          });
+
+          if (response.ok) {
+            fetchPosts();
+            alert("Post deleted successfully!");
+          } else {
+            const error = await response.json();
+            alert(`Error: ${error.error || "Something went wrong"}`);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        }
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchPosts();
+        renderTags();
+      });
+    </script>
+  </body>
+</html>
