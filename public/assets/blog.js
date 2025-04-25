@@ -48,9 +48,14 @@ async function fetchBlogPosts() {
             <span><i class="fa-regular fa-eye"></i> ${
               post.views || 0
             } views</span>
+            ${
+              post.hasMarkdownFile
+                ? '<span><i class="fa-brands fa-markdown"></i> Markdown</span>'
+                : ""
+            }
           </div>
           <div class="blog-content">
-            ${post.summary || post.content.substring(0, 200) + "..."}
+            ${post.summary || post.content?.substring(0, 200) + "..."}
           </div>
           <div class="blog-tags">
             ${
@@ -102,8 +107,13 @@ async function fetchSinglePost(postId) {
                   ).toLocaleDateString()}</span>`
                 : ""
             }
+            ${
+              post.isMarkdown
+                ? '<span><i class="fa-brands fa-markdown"></i> Markdown</span>'
+                : ""
+            }
           </div>
-          <div class="blog-content">
+          <div class="blog-content markdown-content">
             ${post.content}
           </div>
           <div class="blog-tags">

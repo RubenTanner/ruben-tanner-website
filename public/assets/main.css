@@ -1,5 +1,6 @@
 /* font import */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css");
 
 /* CSS Variables */
 :root {
@@ -12,6 +13,9 @@
   --accent-secondary-light: #3a56c5;
   --border-light: rgba(0, 0, 0, 0.1);
   --card-shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --code-bg-light: #f5f7f9;
+  --blockquote-bg-light: #f5f7f9;
+  --blockquote-border-light: #4169e1;
 
   /* Dark theme colors */
   --bg-dark: #0f0e17;
@@ -22,6 +26,9 @@
   --accent-secondary-dark: #5a7af0;
   --border-dark: rgba(255, 255, 255, 0.1);
   --card-shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --code-bg-dark: #2a2a3a;
+  --blockquote-bg-dark: #2a2a3a;
+  --blockquote-border-dark: #5a7af0;
 
   /* Common variables */
   --font-primary: "Inter", sans-serif;
@@ -41,6 +48,9 @@
   --accent-secondary: var(--accent-secondary-light);
   --border: var(--border-light);
   --card-shadow: var(--card-shadow-light);
+  --code-bg: var(--code-bg-light);
+  --blockquote-bg: var(--blockquote-bg-light);
+  --blockquote-border: var(--blockquote-border-light);
 }
 
 /* Dark theme */
@@ -54,6 +64,9 @@
     --accent-secondary: var(--accent-secondary-dark);
     --border: var(--border-dark);
     --card-shadow: var(--card-shadow-dark);
+    --code-bg: var(--code-bg-dark);
+    --blockquote-bg: var(--blockquote-bg-dark);
+    --blockquote-border: var(--blockquote-border-dark);
   }
 }
 
@@ -67,6 +80,9 @@
   --accent-secondary: var(--accent-secondary-dark);
   --border: var(--border-dark);
   --card-shadow: var(--card-shadow-dark);
+  --code-bg: var(--code-bg-dark);
+  --blockquote-bg: var(--blockquote-bg-dark);
+  --blockquote-border: var(--blockquote-border-dark);
 }
 
 /* Base styles */
@@ -245,6 +261,12 @@ p {
   }
   5% {
     clip: rect(70px, 9999px, 71px, 0);
+  }
+  10% {
+    clip: rect(29px, 9999px, 83px, 0);
+  }
+  15% {
+    clip: rect(16px, 9999px 71px, 0);
   }
   10% {
     clip: rect(29px, 9999px, 83px, 0);
@@ -1018,6 +1040,149 @@ p {
   border-radius: 5rem;
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+/* Markdown Content Styles */
+.markdown-content {
+  line-height: 1.8;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.markdown-content h1 {
+  font-size: 3.2rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.markdown-content h2 {
+  font-size: 2.8rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.markdown-content h3 {
+  font-size: 2.4rem;
+}
+
+.markdown-content h4 {
+  font-size: 2rem;
+}
+
+.markdown-content h5 {
+  font-size: 1.8rem;
+}
+
+.markdown-content h6 {
+  font-size: 1.6rem;
+  color: var(--text-secondary);
+}
+
+.markdown-content p {
+  margin-bottom: 1.6rem;
+}
+
+.markdown-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+  transition: var(--transition);
+}
+
+.markdown-content a:hover {
+  color: var(--accent-secondary);
+  border-bottom: 1px solid var(--accent-secondary);
+}
+
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin: 2rem 0;
+  box-shadow: var(--card-shadow);
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid var(--blockquote-border);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  background-color: var(--blockquote-bg);
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  font-style: italic;
+}
+
+.markdown-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content pre {
+  background-color: var(--code-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+}
+
+.markdown-content code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 1.4rem;
+  color: inherit;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin: 1.5rem 0 1.5rem 2rem;
+}
+
+.markdown-content li {
+  margin-bottom: 0.8rem;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  overflow-x: auto;
+  display: block;
+}
+
+.markdown-content table th,
+.markdown-content table td {
+  border: 1px solid var(--border);
+  padding: 1rem;
+  text-align: left;
+}
+
+.markdown-content table th {
+  background-color: rgba(65, 105, 225, 0.1);
+  font-weight: 600;
+}
+
+.markdown-content hr {
+  height: 1px;
+  background-color: var(--border);
+  border: none;
+  margin: 3rem 0;
 }
 
 /* Animations */

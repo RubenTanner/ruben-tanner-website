@@ -32,6 +32,13 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Highlight.js for code syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
     <!-- Meta Tags for SEO -->
     <meta
       name="description"
@@ -178,6 +185,13 @@
             localStorage.setItem("darkTheme", "false");
           }
         }
+
+        // Apply syntax highlighting to code blocks after content is loaded
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightBlock(block);
+          });
+        });
       });
     </script>
   </body>
