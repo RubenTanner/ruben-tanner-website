@@ -497,47 +497,111 @@ function updateRecentActivity(eventsData) {
 
   activityContainer.innerHTML = recentEvents
     .map((event) => {
-      const { type, repo, created_at } = event;
+      const { type, repo, created_at, payload } = event;
       const timeAgo = getTimeAgo(new Date(created_at));
 
-      let icon, description;
+      let icon,
+        description,
+        activityUrl = null;
 
       switch (type) {
         case "PushEvent":
           icon = "fa-solid fa-code-commit";
-          description = `Pushed commits to ${repo.name}`;
+          const commitCount = payload.commits ? payload.commits.length : 0;
+          const commitText = commitCount === 1 ? "commit" : "commits";
+          description = `Pushed ${commitCount} ${commitText} to ${repo.name}`;
+          // Link to the latest commit if available
+          if (payload.commits && payload.commits.length > 0) {
+            const latestCommit = payload.commits[payload.commits.length - 1];
+            activityUrl = `https://github.com/${repo.name}/commit/${latestCommit.sha}`;
+          } else {
+            activityUrl = `https://github.com/${repo.name}`;
+          }
           break;
         case "CreateEvent":
           icon = "fa-solid fa-plus";
-          description = `Created ${event.payload.ref_type} in ${repo.name}`;
+          description = `Created ${payload.ref_type} in ${repo.name}`;
+          if (payload.ref_type === "repository") {
+            activityUrl = `https://github.com/${repo.name}`;
+          } else if (payload.ref_type === "branch" && payload.ref) {
+            activityUrl = `https://github.com/${repo.name}/tree/${payload.ref}`;
+          } else {
+            activityUrl = `https://github.com/${repo.name}`;
+          }
           break;
         case "IssuesEvent":
           icon = "fa-solid fa-circle-exclamation";
-          description = `${event.payload.action} issue in ${repo.name}`;
+          description = `${payload.action} issue in ${repo.name}`;
+          if (payload.issue && payload.issue.number) {
+            activityUrl = `https://github.com/${repo.name}/issues/${payload.issue.number}`;
+          } else {
+            activityUrl = `https://github.com/${repo.name}/issues`;
+          }
           break;
         case "PullRequestEvent":
           icon = "fa-solid fa-code-pull-request";
-          description = `${event.payload.action} pull request in ${repo.name}`;
+          description = `${payload.action} pull request in ${repo.name}`;
+          if (payload.pull_request && payload.pull_request.number) {
+            activityUrl = `https://github.com/${repo.name}/pull/${payload.pull_request.number}`;
+          } else {
+            activityUrl = `https://github.com/${repo.name}/pulls`;
+          }
           break;
         case "WatchEvent":
           icon = "fa-solid fa-star";
           description = `Starred ${repo.name}`;
+          activityUrl = `https://github.com/${repo.name}`;
+          break;
+        case "ForkEvent":
+          icon = "fa-solid fa-code-fork";
+          description = `Forked ${repo.name}`;
+          if (payload.forkee) {
+            activityUrl = payload.forkee.html_url;
+          } else {
+            activityUrl = `https://github.com/${repo.name}`;
+          }
+          break;
+        case "ReleaseEvent":
+          icon = "fa-solid fa-tag";
+          description = `${payload.action} release in ${repo.name}`;
+          if (payload.release) {
+            activityUrl = payload.release.html_url;
+          } else {
+            activityUrl = `https://github.com/${repo.name}/releases`;
+          }
           break;
         default:
           icon = "fa-brands fa-github";
           description = `Activity in ${repo.name}`;
+          activityUrl = `https://github.com/${repo.name}`;
       }
 
-      return `
-      <div class="activity-item">
+      const activityContent = `
         <div class="activity-header">
           <i class="${icon} activity-icon"></i>
           <span class="activity-type">${type.replace("Event", "")}</span>
         </div>
         <div class="activity-description">${description}</div>
         <div class="activity-time">${timeAgo}</div>
-      </div>
-    `;
+      `;
+
+      // Make the entire activity item clickable if we have a URL
+      if (activityUrl) {
+        return `
+          <a href="${activityUrl}" class="activity-item activity-link" target="_blank" rel="noopener noreferrer">
+            ${activityContent}
+            <div class="activity-link-indicator">
+              <i class="fa-solid fa-external-link-alt"></i>
+            </div>
+          </a>
+        `;
+      } else {
+        return `
+          <div class="activity-item">
+            ${activityContent}
+          </div>
+        `;
+      }
     })
     .join("");
 }

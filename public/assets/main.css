@@ -2027,3 +2027,115 @@ p {
     display: none;
   }
 }
+
+/* Activity link styles */
+.activity-link {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.activity-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  color: inherit;
+}
+
+.activity-link:hover .activity-description {
+  color: var(--accent);
+}
+
+.activity-link-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  opacity: 0;
+  transition: var(--transition);
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+.activity-link:hover .activity-link-indicator {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Enhanced repo card hover effects */
+.repo-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.repo-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(65, 105, 225, 0.05) 0%,
+    rgba(90, 122, 240, 0.05) 100%
+  );
+  opacity: 0;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+}
+
+.repo-card:hover::after {
+  opacity: 1;
+}
+
+.repo-card:hover .repo-name {
+  color: var(--accent-secondary);
+}
+
+/* Activity item improvements */
+.activity-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-item::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+  transition: var(--transition);
+}
+
+.activity-link:hover::before {
+  background: var(--accent-secondary);
+  box-shadow: 0 0 8px rgba(65, 105, 225, 0.3);
+}
+
+/* Improve clickable area visual feedback */
+.activity-link .activity-description {
+  transition: var(--transition);
+}
+
+.activity-link:hover .activity-type {
+  color: var(--accent);
+}
+
+/* Add subtle animation for external link icon */
+@keyframes linkPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.activity-link:hover .activity-link-indicator i {
+  animation: linkPulse 1.5s ease-in-out infinite;
+}
