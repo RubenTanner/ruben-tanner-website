@@ -143,6 +143,7 @@
           <a href="#about" class="nav-link">About</a>
           <a href="#portfolio" class="nav-link">Projects</a>
           <a href="/blog" class="nav-link">Blog</a>
+          <a href="#github-activity" class="nav-link">GitHub</a>
           <a href="#mini-chess" class="nav-link">Chess</a>
           <a href="#contact" class="nav-link">Contact</a>
         </div>
@@ -397,6 +398,93 @@
               <a href="/blog" class="view-button">
                 <span>View All Posts</span>
                 <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GitHub Activity Section -->
+      <section id="github-activity" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">GitHub Activity</h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="github-content">
+            <div class="github-stats-grid">
+              <div class="github-stat-card">
+                <div class="stat-icon">
+                  <i class="fa-brands fa-github"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-number" id="public-repos">-</div>
+                  <div class="stat-label">Public Repos</div>
+                </div>
+              </div>
+              <div class="github-stat-card">
+                <div class="stat-icon">
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-number" id="total-stars">-</div>
+                  <div class="stat-label">Total Stars</div>
+                </div>
+              </div>
+              <div class="github-stat-card">
+                <div class="stat-icon">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-number" id="followers">-</div>
+                  <div class="stat-label">Followers</div>
+                </div>
+              </div>
+              <div class="github-stat-card">
+                <div class="stat-icon">
+                  <i class="fa-solid fa-code-commit"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-number" id="contributions">-</div>
+                  <div class="stat-label">This Year</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="github-sections">
+              <div class="github-repos">
+                <h3>Popular Repositories</h3>
+                <div id="popular-repos" class="repos-grid">
+                  <div class="loading">Loading repositories...</div>
+                </div>
+              </div>
+
+              <div class="github-activity">
+                <h3>Recent Activity</h3>
+                <div id="recent-activity" class="activity-list">
+                  <div class="loading">Loading activity...</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="github-languages">
+              <h3>Language Breakdown</h3>
+              <div id="languages-chart" class="languages-chart">
+                <div class="loading">Loading language data...</div>
+              </div>
+              <div id="languages-list" class="languages-list">
+                <!-- Language percentages will be loaded here -->
+              </div>
+            </div>
+
+            <div class="github-cta">
+              <a
+                href="https://github.com/RubenTanner"
+                class="view-button"
+                target="_blank"
+              >
+                <span>View Full Profile</span>
+                <i class="fa-brands fa-github"></i>
               </a>
             </div>
           </div>

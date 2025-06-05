@@ -1706,6 +1706,202 @@ p {
   background-color: #555555;
 }
 
+/* GitHub Languages Section */
+.github-languages {
+  margin: 4rem 0;
+}
+
+.github-languages h3 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.languages-chart {
+  background-color: var(--surface);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pie-chart {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  background: conic-gradient(from 0deg, transparent 0deg);
+  transition: all 0.3s ease;
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background-color: var(--surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border: 2px solid var(--border);
+}
+
+.languages-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.language-item {
+  background-color: var(--surface);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.language-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.language-color {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.language-info {
+  flex: 1;
+}
+
+.language-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.language-percentage {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+.language-bar {
+  width: 100%;
+  height: 4px;
+  background-color: var(--border);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.language-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease-in-out;
+  width: 0%;
+}
+
+/* Language colors */
+.lang-javascript {
+  background-color: #f1e05a;
+}
+.lang-typescript {
+  background-color: #2b7489;
+}
+.lang-python {
+  background-color: #3572a5;
+}
+.lang-html {
+  background-color: #e34c26;
+}
+.lang-css {
+  background-color: #563d7c;
+}
+.lang-vue {
+  background-color: #4fc08d;
+}
+.lang-java {
+  background-color: #b07219;
+}
+.lang-cpp {
+  background-color: #f34b7d;
+}
+.lang-c {
+  background-color: #555555;
+}
+.lang-php {
+  background-color: #4f5d95;
+}
+.lang-ruby {
+  background-color: #701516;
+}
+.lang-go {
+  background-color: #00add8;
+}
+.lang-rust {
+  background-color: #dea584;
+}
+.lang-swift {
+  background-color: #ffac45;
+}
+.lang-kotlin {
+  background-color: #f18e33;
+}
+.lang-shell {
+  background-color: #89e051;
+}
+.lang-dockerfile {
+  background-color: #384d54;
+}
+
+@media (max-width: 768px) {
+  .languages-chart {
+    height: 250px;
+  }
+
+  .pie-chart {
+    width: 150px;
+    height: 150px;
+  }
+
+  .chart-center {
+    width: 90px;
+    height: 90px;
+    font-size: 1.2rem;
+  }
+
+  .languages-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Media Queries */
 @media (max-width: 992px) {
   html {
