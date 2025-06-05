@@ -72,6 +72,7 @@
       crossorigin="anonymous"
     ></script>
     <script defer type="module" src="assets/chess.js"></script>
+    <script defer type="module" src="/assets/particles.js"></script>
   </head>
   <body>
     <div class="noise"></div>
@@ -144,6 +145,7 @@
           <a href="#portfolio" class="nav-link">Projects</a>
           <a href="/blog" class="nav-link">Blog</a>
           <a href="#github-activity" class="nav-link">GitHub</a>
+          <a href="#particle-system" class="nav-link">Particles</a>
           <a href="#mini-chess" class="nav-link">Chess</a>
           <a href="#contact" class="nav-link">Contact</a>
         </div>
@@ -486,6 +488,83 @@
                 <span>View Full Profile</span>
                 <i class="fa-brands fa-github"></i>
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Particle System Section -->
+      <section id="particle-system" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Interactive Particle System</h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="particle-intro">
+            <p>
+              A real-time particle simulation built with vanilla JavaScript and
+              HTML5 Canvas. Move your mouse to interact with the particles and
+              watch the physics come alive.
+            </p>
+          </div>
+          <div class="particle-container">
+            <canvas id="particleCanvas"></canvas>
+            <div class="particle-controls">
+              <div class="control-group">
+                <label for="particleCount"
+                  >Particles: <span id="particleCountValue">150</span></label
+                >
+                <input
+                  type="range"
+                  id="particleCount"
+                  min="50"
+                  max="300"
+                  value="150"
+                />
+              </div>
+              <div class="control-group">
+                <label for="interactionRadius"
+                  >Interaction Radius:
+                  <span id="interactionRadiusValue">100</span></label
+                >
+                <input
+                  type="range"
+                  id="interactionRadius"
+                  min="50"
+                  max="200"
+                  value="100"
+                />
+              </div>
+              <div class="control-group">
+                <button id="toggleConnections" class="particle-btn">
+                  Toggle Connections
+                </button>
+                <button id="toggleTrails" class="particle-btn">
+                  Toggle Trails
+                </button>
+                <button id="resetParticles" class="particle-btn">Reset</button>
+              </div>
+            </div>
+          </div>
+          <div class="code-showcase">
+            <h3>Code Highlights</h3>
+            <div class="code-features">
+              <div class="feature-item">
+                <i class="fa-solid fa-microchip"></i>
+                <span>Optimized rendering with requestAnimationFrame</span>
+              </div>
+              <div class="feature-item">
+                <i class="fa-solid fa-vector-square"></i>
+                <span>Vector mathematics for realistic physics</span>
+              </div>
+              <div class="feature-item">
+                <i class="fa-solid fa-mouse-pointer"></i>
+                <span>Real-time mouse interaction and collision detection</span>
+              </div>
+              <div class="feature-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Performance monitoring and adaptive quality</span>
+              </div>
             </div>
           </div>
         </div>
