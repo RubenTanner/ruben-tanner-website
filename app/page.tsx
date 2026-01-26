@@ -1532,9 +1532,15 @@ export default function Home() {
             alignItems: "center",
           }}
         >
-          <p style={{ fontSize: "14px", color: "var(--text-muted)" }}>
-            {new Date().getFullYear()} Ruben Tanner
-          </p>
+          <div style={{ fontSize: "14px", color: "var(--text-muted)" }}>
+            <p>{new Date().getFullYear()} Ruben Tanner</p>
+            <p style={{ marginTop: "8px" }}>
+              Made with <span style={{ color: "#ef4444" }}>❤️</span> by{" "}
+              <span style={{ color: "var(--accent)", fontWeight: 600 }}>
+                Ruben Tanner
+              </span>
+            </p>
+          </div>
           <div style={{ display: "flex", gap: "32px" }}>
             {socials.map((social) => (
               <a
