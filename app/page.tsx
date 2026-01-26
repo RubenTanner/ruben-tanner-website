@@ -1255,14 +1255,20 @@ export default function Home() {
 
         <div
           style={{
-            background: "var(--card-bg)",
-            border: "1px solid var(--border)",
-            borderRadius: "24px",
-            padding: "40px",
-            display: "inline-block",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <StockfishChess isDark={isDark} />
+          <div
+            style={{
+              background: "var(--card-bg)",
+              border: "1px solid var(--border)",
+              borderRadius: "24px",
+              padding: "40px",
+            }}
+          >
+            <StockfishChess isDark={isDark} />
+          </div>
         </div>
       </section>
 
