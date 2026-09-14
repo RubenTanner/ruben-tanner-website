@@ -1,229 +1,436 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ruben Tanner</title>
-  <meta name="description" content="Graduate Technical Programme Manager at Tesco Technology, software engineer by training, and the person building GoTutor.">
-  <link rel="canonical" href="https://www.ruben-tanner.uk/">
-  <meta name="author" content="Ruben Tanner">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#467ceb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ruben Tanner</title>
+    <meta
+      name="description"
+      content="Graduate Technical Programme Manager at Tesco Technology, software engineer by training, and the person building GoTutor."
+    />
+    <link rel="canonical" href="https://www.ruben-tanner.uk/" />
+    <meta name="author" content="Ruben Tanner" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#467ceb" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Ruben Tanner">
-  <meta property="og:title" content="Ruben Tanner">
-  <meta property="og:description" content="Graduate Technical Programme Manager at Tesco Technology, software engineer by training, and the person building GoTutor.">
-  <meta property="og:url" content="https://www.ruben-tanner.uk/">
-  <meta property="og:image" content="https://www.ruben-tanner.uk/assets/images/ruben.png">
-  <meta property="og:image:width" content="320">
-  <meta property="og:image:height" content="320">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Ruben Tanner">
-  <meta name="twitter:description" content="Graduate Technical Programme Manager at Tesco Technology, software engineer by training, and the person building GoTutor.">
-  <meta name="twitter:image" content="https://www.ruben-tanner.uk/assets/images/ruben.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ruben Tanner" />
+    <meta property="og:title" content="Ruben Tanner" />
+    <meta
+      property="og:description"
+      content="Graduate Technical Programme Manager at Tesco Technology, software engineer by training, and the person building GoTutor."
+    />
+    <meta property="og:url" content="https://www.ruben-tanner.uk/" />
+    <meta
+      property="og:image"
+      content="https://www.ruben-tanner.uk/assets/images/ruben.png"
+    />
+    <meta property="og:image:width" content="320" />
+    <meta property="og:image:height" content="320" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Ruben Tanner" />
+    <meta
+      name="twitter:description"
+      content="Graduate Technical Programme Manager at Tesco Technology, software engineer by training, and the person building GoTutor."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.ruben-tanner.uk/assets/images/ruben.png"
+    />
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="preload" href="/assets/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/IBMPlexSans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/site.css">
+    <link
+      rel="preload"
+      href="/assets/fonts/SpaceGrotesk.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/IBMPlexSans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/site.css" />
 
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem("theme");
-        var dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.classList.toggle("dark", dark);
-        document.documentElement.classList.add("js");
-      } catch (e) {}
-    })();
-  </script>
-  <script type="module" src="/assets/site.js"></script>
-</head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var dark = saved
+            ? saved === "dark"
+            : matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.classList.toggle("dark", dark);
+          document.documentElement.classList.add("js");
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" src="/assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="wrap">
-      <a class="monogram" href="/">RT<span>.</span><span class="visually-hidden"> Ruben Tanner, home</span></a>
-      <nav aria-label="Sections">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#chess">Chess</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button id="theme-toggle" type="button" aria-label="Switch to dark theme">
-        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" hidden><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero" aria-labelledby="name">
+    <header class="site-header">
       <div class="wrap">
-        <h1 id="name">Ruben Tanner</h1>
-        <p class="hero-line">Graduate Technical Programme Manager at Tesco Technology. Software engineer by training. Builds GoTutor in the evenings.</p>
+        <a class="monogram" href="/"
+          >RT<span>.</span
+          ><span class="visually-hidden"> Ruben Tanner, home</span></a
+        >
+        <nav aria-label="Sections">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#chess">Chess</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Switch to dark theme"
+        >
+          <svg
+            class="icon-moon"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            class="icon-sun"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            focusable="false"
+            hidden
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
       </div>
-    </section>
+    </header>
 
-    <ul class="handles wrap" aria-label="Elsewhere">
-      <li><a href="https://github.com/RubenTanner" rel="me"><span>GitHub</span> /RubenTanner</a></li>
-      <li><a href="https://www.linkedin.com/in/ruben-tanner-75a03321a/" rel="me"><span>LinkedIn</span> /Ruben Tanner</a></li>
-      <li><a href="https://www.instagram.com/phat.yikes_31" rel="me"><span>Instagram</span> /phat.yikes_31</a></li>
-      <li><a href="https://discordapp.com/users/758775356848078848" rel="me"><span>Discord</span> @phatyikes</a></li>
-    </ul>
+    <main id="main">
+      <section class="hero" aria-labelledby="name">
+        <div class="wrap">
+          <h1 id="name">Ruben Tanner</h1>
+          <p class="hero-line">
+            Graduate Technical Programme Manager at Tesco Technology. Software
+            engineer by training. Builds GoTutor in the evenings.
+          </p>
+        </div>
+      </section>
 
-    <section id="about" class="wrap col-narrow">
-      <h2>About</h2>
-      <p>I sit between delivery and engineering. At Tesco I run programmes that cut across engineering, product, analytics and creative teams, and I still write code most weeks, partly because I like knowing how the thing I'm coordinating actually works.</p>
-      <p>I graduated from the University of Portsmouth in 2026 with a BSc (Hons) in Software Engineering, and became a Certified Scrum Product Owner the same year. Before any of that I was a junior software engineer at a garden-tech startup, writing PHP and JavaScript.</p>
-      <p>Day to day that means JavaScript, Python (just a bit), PHP and Laravel, Java, SQL, and a great deal of Jira, Confluence and Excel. I've load-tested things on Azure, built a footfall detector with YOLO, and can still hand-write HTML and CSS, which is how this page exists.</p>
-      <p>Outside work I coach American football with the London Blitz B Team (BAFCA Level 1 in progress), volunteer with the Kent Digital Champions Network, and am part of the Sea Cadet Corps. I also play chess, not well, which is why there's a board further down.</p>
-    </section>
+      <ul class="handles wrap" aria-label="Elsewhere">
+        <li>
+          <a href="https://github.com/RubenTanner" rel="me"
+            ><span>GitHub</span> /RubenTanner</a
+          >
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/ruben-tanner-75a03321a/" rel="me"
+            ><span>LinkedIn</span> /Ruben Tanner</a
+          >
+        </li>
+        <li>
+          <a href="https://www.instagram.com/phat.yikes_31" rel="me"
+            ><span>Instagram</span> /phat.yikes_31</a
+          >
+        </li>
+        <li>
+          <a href="https://discordapp.com/users/758775356848078848" rel="me"
+            ><span>Discord</span> @phatyikes</a
+          >
+        </li>
+      </ul>
 
-    <section id="experience" class="wrap col-wide">
-      <h2>Experience</h2>
+      <section id="about" class="wrap col-narrow">
+        <h2>About</h2>
+        <p>
+          I sit between delivery and engineering. At Tesco I run programmes that
+          cut across engineering, product, analytics and creative teams, and I
+          still write code most weeks, partly because I like knowing how the
+          thing I'm coordinating actually works.
+        </p>
+        <p>
+          I graduated from the University of Portsmouth in 2026 with a BSc
+          (Hons) in Software Engineering, and became a Certified Scrum Product
+          Owner the same year. Before any of that I was a junior software
+          engineer at a garden-tech startup, writing PHP and JavaScript.
+        </p>
+        <p>
+          Day to day that means JavaScript, Python (just a bit), PHP and
+          Laravel, Java, SQL, and a great deal of Jira, Confluence and Excel.
+          I've load-tested things on Azure, built a footfall detector with YOLO,
+          and can still hand-write HTML and CSS, which is how this page exists.
+        </p>
+        <p>
+          Outside work I coach American football with the London Blitz B Team
+          (BAFCA Level 1 in progress), volunteer with the Kent Digital Champions
+          Network, and am part of the Sea Cadet Corps. I also play chess, not
+          well, which is why there's a board further down.
+        </p>
+      </section>
+
+      <section id="experience" class="wrap col-wide">
+      <div class="section-head">
+        <h2>Experience</h2>
+      </div>
       <ol class="timeline">
         <li>
-          <p class="when"><time datetime="2025-09">Sep 2025</time> to now</p>
-          <div>
-            <h3>Graduate Technical Programme Manager</h3>
-            <p class="org">Tesco Technology, Welwyn Garden City and London</p>
-            <p>Rotations across Infrastructure Portfolio Governance, Store Operations, Customer Fulfilment and Content Personalisation.</p>
-            <ul>
-              <li><strong>Content Personalisation, current.</strong> Delivery coordination across 19 workstreams spanning engineering, product, analytics, optimisation and creative. Launched personalised category pages on the website and scaled the app experience to the full customer audience in the same quarter.</li>
-              <li><strong>Retargeting.</strong> Drove the integration to production across five live page types.</li>
-              <li><strong>Subs Compliance.</strong> Ran it from inception: design sign-off from every stakeholder group by week 8, handed to development on schedule, now in an in-store soft trial. Built the governance from scratch, with a RAID log, a Gantt, and comms and risk dashboards that populate themselves.</li>
-              <li><strong>GSP re-enablement at the Crawley Customer Fulfilment Centre.</strong> Programme documentation, workshop outputs and updates to leadership.</li>
-              <li><strong>People.</strong> Ran intern and graduate recruitment and led the summer intern cohort. Ran an intern hackathon that shipped two browser games on a shared vanilla-JavaScript 2D engine, and built a YOLO footfall-detection proof of concept on the side.</li>
-            </ul>
-          </div>
+          <details class="entry" open>
+            <summary>
+              <span class="when"><time datetime="2025-09">Sep 2025</time> to now</span>
+              <h3><span class="role">Graduate Technical Programme Manager</span> <span class="org">Tesco Technology</span></h3>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p class="place">Welwyn Garden City and London. Rotations across Infrastructure Portfolio Governance, Store Operations, Customer Fulfilment and Content Personalisation.</p>
+              <ul>
+                <li><strong>Content Personalisation, current.</strong> Delivery coordination across 19 workstreams spanning engineering, product, analytics, optimisation and creative. Launched personalised category pages on the website and scaled the app experience to the full customer audience in the same quarter.</li>
+                <li><strong>Retargeting.</strong> Drove the integration to production across five live page types.</li>
+                <li><strong>Subs Compliance.</strong> Ran it from inception: design sign-off from every stakeholder group by week 8, handed to development on schedule, now in an in-store soft trial. Built the governance from scratch, with a RAID log, a Gantt, and comms and risk dashboards that populate themselves.</li>
+                <li><strong>GSP re-enablement at the Crawley Customer Fulfilment Centre.</strong> Programme documentation, workshop outputs and updates to leadership.</li>
+                <li><strong>People.</strong> Ran intern and graduate recruitment and led the summer intern cohort. Ran an intern hackathon that shipped two browser games on a shared vanilla-JavaScript 2D engine, and built a YOLO footfall-detection proof of concept on the side.</li>
+              </ul>
+            </div>
+          </details>
         </li>
         <li>
-          <p class="when"><time datetime="2024">2024</time> to now</p>
-          <div>
-            <h3>Founder and Lead Developer</h3>
-            <p class="org">GoTutor</p>
-            <p>A UK tutoring platform, built solo at every layer: tutor booking and scheduling, credit-based payments, AI-generated session notes and student progress tracking. Live in beta and serving students nationally. I own the roadmap, the technical design, the build, the releases and the feedback loop.</p>
-          </div>
+          <details class="entry">
+            <summary>
+              <span class="when"><time datetime="2024">2024</time> to now</span>
+              <h3><span class="role">Founder and Lead Developer</span> <span class="org">GoTutor</span></h3>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>A UK tutoring platform, built solo at every layer: tutor booking and scheduling, credit-based payments, AI-generated session notes and student progress tracking. Live in beta and serving students nationally. I own the roadmap, the technical design, the build, the releases and the feedback loop.</p>
+            </div>
+          </details>
         </li>
         <li>
-          <p class="when"><time datetime="2023">2023</time> to <time datetime="2025">2025</time></p>
-          <div>
-            <h3>IT Help Advisor</h3>
-            <p class="org">University of Portsmouth</p>
-            <p>First-line support across a 25,000-user estate. Good training in explaining things calmly to people having a bad day.</p>
-          </div>
+          <details class="entry">
+            <summary>
+              <span class="when"><time datetime="2023">2023</time> to <time datetime="2025">2025</time></span>
+              <h3><span class="role">IT Help Advisor</span> <span class="org">University of Portsmouth</span></h3>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>First-line support across a 25,000-user estate. Good training in explaining things calmly to people having a bad day.</p>
+            </div>
+          </details>
         </li>
         <li>
-          <p class="when"><time datetime="2023-06">Summer 2023</time></p>
-          <div>
-            <h3>Technical Programme Manager Intern</h3>
-            <p class="org">Tesco Technology</p>
-            <p>Ten weeks in Infrastructure Portfolio Governance running the Technology Approval Gateway process. Tracked the papers behind over £50m of approved technology investment.</p>
-          </div>
+          <details class="entry">
+            <summary>
+              <span class="when"><time datetime="2023-06">Summer 2023</time></span>
+              <h3><span class="role">Technical Programme Manager Intern</span> <span class="org">Tesco Technology</span></h3>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>Ten weeks in Infrastructure Portfolio Governance running the Technology Approval Gateway process. Tracked the papers behind over £50m of approved technology investment.</p>
+            </div>
+          </details>
         </li>
         <li>
-          <p class="when"><time datetime="2022">2022</time> to <time datetime="2026">2026</time></p>
-          <div>
-            <h3>BSc (Hons) Software Engineering with Digital Placement, 2:1</h3>
-            <p class="org">University of Portsmouth</p>
-            <p>Also Certified Scrum Product Owner, Scrum Alliance, 2026.</p>
-          </div>
+          <details class="entry">
+            <summary>
+              <span class="when"><time datetime="2022">2022</time> to <time datetime="2026">2026</time></span>
+              <h3><span class="role">BSc (Hons) Software Engineering, 2:1</span> <span class="org">University of Portsmouth</span></h3>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>Software Engineering with Digital Placement. Also Certified Scrum Product Owner, Scrum Alliance, 2026.</p>
+            </div>
+          </details>
         </li>
         <li>
-          <p class="when"><time datetime="2020-10">Oct 2020</time> to <time datetime="2022-02">Feb 2022</time></p>
-          <div>
-            <h3>Junior Software Engineer</h3>
-            <p class="org">Sustainable Garden Technologies</p>
-            <p>PHP and Laravel on the back, JavaScript on the front. API and front-end features, relational database design, and GDPR-compliant handling of customer data.</p>
-          </div>
+          <details class="entry">
+            <summary>
+              <span class="when"><time datetime="2020-10">Oct 2020</time> to <time datetime="2022-02">Feb 2022</time></span>
+              <h3><span class="role">Junior Software Engineer</span> <span class="org">Sustainable Garden Technologies</span></h3>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>PHP and Laravel on the back, JavaScript on the front. API and front-end features, relational database design, and GDPR-compliant handling of customer data.</p>
+            </div>
+          </details>
         </li>
       </ol>
     </section>
 
     <section id="projects" class="wrap col-wide">
       <span id="portfolio"></span>
-      <h2>Projects</h2>
+      <div class="section-head">
+        <h2>Projects</h2>
+      </div>
       <ul class="projects">
         <li>
-          <div class="project-head">
-            <h3><a href="https://beta.gotutor.uk">GoTutor</a></h3>
-            <p class="status">Live, in beta</p>
-          </div>
-          <p>The thing I spend most evenings on. Tutors set their availability, students book and pay with credits, and notes are generated after each session so progress is tracked without anyone filling in a form. Built alone, from the database up.</p>
-          <p class="meta">JavaScript, Node.js, PostgreSQL, Stripe</p>
+          <details class="entry" open>
+            <summary>
+              <h3>GoTutor</h3>
+              <span class="status">Live, in beta</span>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>The thing I spend most evenings on. Tutors set their availability, students book and pay with credits, and notes are generated after each session so progress is tracked without anyone filling in a form. Built alone, from the database up.</p>
+              <p class="meta">JavaScript, Node.js, PostgreSQL, Stripe. <a href="https://beta.gotutor.uk">beta.gotutor.uk</a></p>
+            </div>
+          </details>
         </li>
         <li>
-          <div class="project-head">
-            <h3><a href="https://github.com/RubenTanner/ruben-tanner-website">This website</a></h3>
-            <p class="status">You're looking at it</p>
-          </div>
-          <p>Version five, if you count the one that was mostly a strength tracker. Hand-written HTML, one stylesheet, and a few hundred lines of JavaScript for the theme switch and the chess board. Earlier versions ran on Express and then Next.js; this one needs neither.</p>
-          <p class="meta">HTML, CSS, JavaScript, nginx</p>
+          <details class="entry">
+            <summary>
+              <h3>This website</h3>
+              <span class="status">You're looking at it</span>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>Version five, if you count the one that was mostly a strength tracker. Hand-written HTML, one stylesheet, and a few hundred lines of JavaScript for the theme switch, these folding rows and the chess board. Earlier versions ran on Express and then Next.js; this one needs neither.</p>
+              <p class="meta">HTML, CSS, JavaScript, nginx. <a href="https://github.com/RubenTanner/ruben-tanner-website">Source on GitHub</a></p>
+            </div>
+          </details>
         </li>
         <li>
-          <div class="project-head">
-            <h3><a href="https://github.com/RubenTanner/Spinwise">Spinwise</a></h3>
-            <p class="status">Not running any more</p>
-          </div>
-          <p>A Spotify companion that read your listening history and asked a language model for recommendations that weren't emo tracks from 2015. It made it onto Product Hunt. The servers are off now.</p>
-          <p class="meta">Next.js, OpenAI, Spotify API</p>
+          <details class="entry">
+            <summary>
+              <h3>Spinwise</h3>
+              <span class="status">Not running any more</span>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>A Spotify companion that read your listening history and asked a language model for recommendations that weren't emo tracks from 2015. It made it onto Product Hunt. The servers are off now.</p>
+              <p class="meta">Next.js, OpenAI, Spotify API. <a href="https://github.com/RubenTanner/Spinwise">Source on GitHub</a></p>
+            </div>
+          </details>
         </li>
         <li>
-          <div class="project-head">
-            <h3><a href="https://github.com/RubenTanner/ARYAN">ARYAN</a></h3>
-            <p class="status">Not running any more</p>
-          </div>
-          <p>A Discord bouncer. It checks the account age of anyone joining and times them out until they meet the server's minimum, because one ban evader kept coming back with fresh accounts. Could be switched back on if anyone asks.</p>
-          <p class="meta">Node.js, Discord.js</p>
+          <details class="entry">
+            <summary>
+              <h3>ARYAN</h3>
+              <span class="status">Not running any more</span>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>A Discord bouncer. It checks the account age of anyone joining and times them out until they meet the server's minimum, because one ban evader kept coming back with fresh accounts. Could be switched back on if anyone asks.</p>
+              <p class="meta">Node.js, Discord.js. <a href="https://github.com/RubenTanner/ARYAN">Source on GitHub</a></p>
+            </div>
+          </details>
         </li>
         <li>
-          <div class="project-head">
-            <h3><a href="https://github.com/RubenTanner/Destroyers-Strength-Tracker">Destroyers Strength &amp; Conditioning Tracker</a></h3>
-            <p class="status">Retired after one season</p>
-          </div>
-          <p>Built for the Portsmouth Destroyers, my university American football team, so players could log their lifts and coaches could see the whole squad's progress week by week. It lived on this domain while it was in use.</p>
-          <p class="meta">HTML, CSS, JavaScript, Express</p>
+          <details class="entry">
+            <summary>
+              <h3>Destroyers Strength &amp; Conditioning Tracker</h3>
+              <span class="status">Retired after one season</span>
+              <span class="marker" aria-hidden="true"></span>
+            </summary>
+            <div class="entry-body">
+              <p>Built for the Portsmouth Destroyers, my university American football team, so players could log their lifts and coaches could see the whole squad's progress week by week. It lived on this domain while it was in use.</p>
+              <p class="meta">HTML, CSS, JavaScript, Express. <a href="https://github.com/RubenTanner/Destroyers-Strength-Tracker">Source on GitHub</a></p>
+            </div>
+          </details>
         </li>
       </ul>
     </section>
 
     <section id="chess" class="wrap col-wide">
-      <span id="mini-chess"></span>
-      <h2>Chess</h2>
-      <p class="intro">Bored? Have a game. You're white. The opponent is a minimax search with piece-square tables, which sounds grander than it plays, and it runs in a Web Worker in your browser, so nothing leaves the page.</p>
-      <div id="chess-app">
-        <button id="chess-play" type="button" class="button">Set up the board</button>
-        <noscript><p class="muted">The board needs JavaScript. Everything else on this page doesn't.</p></noscript>
+        <span id="mini-chess"></span>
+        <h2>Chess</h2>
+        <p class="intro">
+          Bored? Have a game. You're white. The opponent is a minimax search
+          with piece-square tables, which sounds grander than it plays, and it
+          runs in a Web Worker in your browser, so nothing leaves the page.
+        </p>
+        <div id="chess-app">
+          <button id="chess-play" type="button" class="button">
+            Set up the board
+          </button>
+          <noscript
+            ><p class="muted">
+              The board needs JavaScript. Everything else on this page doesn't.
+            </p></noscript
+          >
+        </div>
+      </section>
+
+      <section id="contact" class="wrap col-narrow">
+        <span id="github-activity"></span>
+        <h2>Contact</h2>
+        <p class="contact-line">
+          The best way is email:
+          <a href="mailto:hello@ruben-tanner.uk">hello@ruben-tanner.uk</a>. I
+          read everything and reply to most of it.
+        </p>
+        <ul class="handles">
+          <li id="github">
+            <a href="https://github.com/RubenTanner" rel="me"
+              ><span>GitHub</span> /RubenTanner</a
+            >
+            <a class="sponsor" href="https://github.com/sponsors/RubenTanner"
+              >sponsor</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/ruben-tanner-75a03321a/"
+              rel="me"
+              ><span>LinkedIn</span> /Ruben Tanner</a
+            >
+          </li>
+          <li>
+            <a href="https://www.instagram.com/phat.yikes_31" rel="me"
+              ><span>Instagram</span> /phat.yikes_31</a
+            >
+          </li>
+          <li>
+            <a href="https://discordapp.com/users/758775356848078848" rel="me"
+              ><span>Discord</span> @phatyikes</a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          © 2026 Ruben Tanner. Hand-written HTML and CSS, no framework.
+          <a href="https://github.com/RubenTanner/ruben-tanner-website"
+            >Source on GitHub</a
+          >.
+        </p>
+        <p class="muted">womp womp, you've reached the end.</p>
       </div>
-    </section>
-
-    <section id="contact" class="wrap col-narrow">
-      <span id="github-activity"></span>
-      <h2>Contact</h2>
-      <p class="contact-line">The best way is email: <a href="mailto:hello@ruben-tanner.uk">hello@ruben-tanner.uk</a>. I read everything and reply to most of it.</p>
-      <ul class="handles">
-        <li id="github"><a href="https://github.com/RubenTanner" rel="me"><span>GitHub</span> /RubenTanner</a> <a class="sponsor" href="https://github.com/sponsors/RubenTanner">sponsor</a></li>
-        <li><a href="https://www.linkedin.com/in/ruben-tanner-75a03321a/" rel="me"><span>LinkedIn</span> /Ruben Tanner</a></li>
-        <li><a href="https://www.instagram.com/phat.yikes_31" rel="me"><span>Instagram</span> /phat.yikes_31</a></li>
-        <li><a href="https://discordapp.com/users/758775356848078848" rel="me"><span>Discord</span> @phatyikes</a></li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>© 2026 Ruben Tanner. Hand-written HTML and CSS, no framework. <a href="https://github.com/RubenTanner/ruben-tanner-website">Source on GitHub</a>.</p>
-      <p class="muted">womp womp, you've reached the end.</p>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
