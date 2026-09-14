@@ -120,8 +120,11 @@ function minimax(game, depth, alpha, beta, maximising) {
     let best = -Infinity;
     for (const m of moves) {
       game._makeMove(m);
-      best = Math.max(best, minimax(game, depth - 1, alpha, beta, false));
-      game._undoMove();
+      try {
+        best = Math.max(best, minimax(game, depth - 1, alpha, beta, false));
+      } finally {
+        game._undoMove(); // also runs when OutOfTime unwinds, so the position is never left corrupted
+      }
       alpha = Math.max(alpha, best);
       if (beta <= alpha) break;
     }
@@ -130,8 +133,11 @@ function minimax(game, depth, alpha, beta, maximising) {
   let best = Infinity;
   for (const m of moves) {
     game._makeMove(m);
-    best = Math.min(best, minimax(game, depth - 1, alpha, beta, true));
-    game._undoMove();
+    try {
+      best = Math.min(best, minimax(game, depth - 1, alpha, beta, true));
+    } finally {
+      game._undoMove();
+    }
     beta = Math.min(beta, best);
     if (beta <= alpha) break;
   }
@@ -144,8 +150,12 @@ function searchDepth(game, depth, randomness) {
   let bestScore = -Infinity;
   for (const m of moves) {
     game._makeMove(m);
-    let score = minimax(game, depth - 1, -Infinity, Infinity, false);
-    game._undoMove();
+    let score;
+    try {
+      score = minimax(game, depth - 1, -Infinity, Infinity, false);
+    } finally {
+      game._undoMove();
+    }
     if (randomness) score += (Math.random() - 0.5) * randomness;
     if (score > bestScore) {
       bestScore = score;
