@@ -129,10 +129,14 @@ a:hover { text-decoration-thickness: 0.18em; }
 }
 
 .muted { color: var(--muted); }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
 .skip {
   position: absolute; left: var(--s-3); top: -3rem;
   padding: var(--s-2) var(--s-3);
-  background: var(--accent); color: var(--on-accent);
+  background: var(--text); color: var(--bg);
   text-decoration: none;
 }
 .skip:focus { top: var(--s-3); z-index: 10; }
@@ -148,7 +152,7 @@ a:hover { text-decoration-thickness: 0.18em; }
   font-family: var(--display); font-weight: 700; font-size: 1.5rem;
   letter-spacing: -0.04em; text-decoration: none; color: var(--text);
 }
-.monogram span { color: var(--accent); }
+.monogram > span:first-child { color: var(--accent); }
 .site-header nav { display: flex; gap: var(--s-4); flex-wrap: wrap; margin-inline: auto; }
 .site-header nav a {
   font-size: 0.9375rem; font-weight: 500; color: var(--text-2);
@@ -250,10 +254,10 @@ section h2 { max-width: none; }
 .button {
   font: inherit; font-weight: 500;
   padding: var(--s-2) var(--s-4);
-  background: var(--accent); color: var(--on-accent);
+  background: var(--text); color: var(--bg);   /* inverted, not blue: white on the accent is under 4.5:1 at body size */
   border: 0; border-radius: 4px; cursor: pointer;
 }
-.button:hover { filter: brightness(1.08); }
+.button:hover { background: var(--text-2); }
 .button:disabled { opacity: 0.6; cursor: default; }
 .button-quiet {
   font: inherit; font-weight: 500;
