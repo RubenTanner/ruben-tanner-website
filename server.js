@@ -1,10 +1,15 @@
-// Zero-dependency static server for local development.
-// Mirrors the production nginx behaviour in deploy/nginx.conf:
+// Production server, run under PM2 as "ruben-tanner.uk".
+// Zero dependencies: serves public/ with the same rules the old nginx
+// static-root config had, since nginx now reverse-proxies to this process
+// instead of reading the directory directly. See deploy/nginx.conf.
 //   /            -> public/index.html
 //   /foo         -> public/foo.html if it exists
 //   /blog(/...)  -> 301 to /
 //   anything else missing -> public/404.html with a 404 status
-// Production is nginx; this file never runs on the server.
+//
+// Also doubles as the local dev server: `npm run dev` / `npm run start`
+// both run this file. Port comes from $PORT, falling back to 3000 so it
+// still works with no environment set up at all.
 
 const http = require("node:http");
 const fs = require("node:fs");
@@ -27,9 +32,25 @@ const TYPES = {
   ".woff2": "font/woff2",
 };
 
+// Assets aren't fingerprinted, so HTML always revalidates while fonts and
+// images can sit for a while. Mirrors the Cache-Control values the old
+// nginx static-root config used.
+function cacheControl(ext) {
+  if (ext === ".html") return "no-cache";
+  if (ext === ".css" || ext === ".js") return "public, max-age=3600";
+  if ([".woff2", ".png", ".ico", ".svg", ".webmanifest"].includes(ext)) {
+    return "public, max-age=2592000";
+  }
+  return "no-cache";
+}
+
 function send(res, status, file) {
-  const type = TYPES[path.extname(file)] || "application/octet-stream";
-  res.writeHead(status, { "Content-Type": type });
+  const ext = path.extname(file);
+  const type = TYPES[ext] || "application/octet-stream";
+  res.writeHead(status, {
+    "Content-Type": type,
+    "Cache-Control": cacheControl(ext),
+  });
   fs.createReadStream(file).pipe(res);
 }
 

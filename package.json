@@ -4,7 +4,7 @@
   "private": true,
   "description": "Personal website for Ruben Tanner. Static HTML, one stylesheet, a little JavaScript.",
   "scripts": {
-    "dev": "node dev.js",
-    "start": "node dev.js"
+    "dev": "node server.js",
+    "start": "node server.js"
   }
 }
