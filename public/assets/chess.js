@@ -3,7 +3,14 @@
 import { Chess } from "/assets/vendor/chess.js";
 
 const GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
-const NAME = { k: "king", q: "queen", r: "rook", b: "bishop", n: "knight", p: "pawn" };
+const NAME = {
+  k: "king",
+  q: "queen",
+  r: "rook",
+  b: "bishop",
+  n: "knight",
+  p: "pawn",
+};
 const FILES = "abcdefgh";
 const LEVELS = {
   easy: { depth: 1, budgetMs: 500 },
@@ -38,31 +45,56 @@ export function mount(container) {
     for (let f = 0; f < 8; f++) squares.push(FILES[f] + rank);
   }
 
-  const board = el("div", { class: "board", role: "group", "aria-label": "Chess board. You play white." });
+  const board = el("div", {
+    class: "board",
+    role: "group",
+    "aria-label": "Chess board. You play white.",
+  });
   const buttons = new Map();
   squares.forEach((sq, i) => {
     const light = (FILES.indexOf(sq[0]) + Number(sq[1])) % 2 === 1;
-    const b = el("button", { type: "button", class: `sq ${light ? "sq-light" : "sq-dark"}`, "data-square": sq, "data-index": String(i) });
+    const b = el("button", {
+      type: "button",
+      class: `sq ${light ? "sq-light" : "sq-dark"}`,
+      "data-square": sq,
+      "data-index": String(i),
+    });
     b.addEventListener("click", () => onSquare(sq));
     board.append(b);
     buttons.set(sq, b);
   });
   board.addEventListener("keydown", onArrow);
 
-  const status = el("p", { class: "chess-status", role: "status", "aria-live": "polite" });
-  const level = el("select", { id: "chess-level", "aria-label": "Difficulty" }, [
-    el("option", { value: "easy", text: "Easy" }),
-    el("option", { value: "medium", text: "Medium", selected: "" }),
-    el("option", { value: "hard", text: "Hard" }),
-    el("option", { value: "harder", text: "Harder, and slower" }),
-  ]);
-  const reset = el("button", { type: "button", class: "button-quiet", text: "New game" });
+  const status = el("p", {
+    class: "chess-status",
+    role: "status",
+    "aria-live": "polite",
+  });
+  const level = el(
+    "select",
+    { id: "chess-level", "aria-label": "Difficulty" },
+    [
+      el("option", { value: "easy", text: "Easy" }),
+      el("option", { value: "medium", text: "Medium", selected: "" }),
+      el("option", { value: "hard", text: "Hard" }),
+      el("option", { value: "harder", text: "Harder, and slower" }),
+    ],
+  );
+  const reset = el("button", {
+    type: "button",
+    class: "button-quiet",
+    text: "New game",
+  });
   reset.addEventListener("click", newGame);
   const moves = el("ol", { class: "moves", "aria-label": "Moves so far" });
 
   const side = el("div", { class: "chess-side" }, [
     status,
-    el("div", { class: "chess-controls" }, [el("label", { for: "chess-level", text: "Difficulty" }), level, reset]),
+    el("div", { class: "chess-controls" }, [
+      el("label", { for: "chess-level", text: "Difficulty" }),
+      level,
+      reset,
+    ]),
     moves,
   ]);
 
@@ -115,7 +147,12 @@ export function mount(container) {
     job += 1;
     render();
     const l = LEVELS[level.value] || LEVELS.medium;
-    worker.postMessage({ id: job, fen: game.fen(), depth: l.depth, budgetMs: l.budgetMs });
+    worker.postMessage({
+      id: job,
+      fen: game.fen(),
+      depth: l.depth,
+      budgetMs: l.budgetMs,
+    });
   }
 
   function newGame() {
@@ -130,17 +167,26 @@ export function mount(container) {
   }
 
   function onArrow(e) {
-    const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -8, ArrowDown: 8 }[e.key];
+    const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -8, ArrowDown: 8 }[
+      e.key
+    ];
     if (step === undefined || !e.target.dataset.index) return;
     const i = Number(e.target.dataset.index) + step;
     if (i < 0 || i > 63) return;
-    if ((e.key === "ArrowLeft" && i % 8 === 7) || (e.key === "ArrowRight" && i % 8 === 0)) return;
+    if (
+      (e.key === "ArrowLeft" && i % 8 === 7) ||
+      (e.key === "ArrowRight" && i % 8 === 0)
+    )
+      return;
     e.preventDefault();
     board.children[i].focus();
   }
 
   function statusText() {
-    if (game.isCheckmate()) return game.turn() === "w" ? "Checkmate. Black wins." : "Checkmate. You win.";
+    if (game.isCheckmate())
+      return game.turn() === "w"
+        ? "Checkmate. Black wins."
+        : "Checkmate. You win.";
     if (game.isStalemate()) return "Draw by stalemate.";
     if (game.isThreefoldRepetition()) return "Draw by repetition.";
     if (game.isInsufficientMaterial()) return "Draw. Not enough material left.";
@@ -155,20 +201,32 @@ export function mount(container) {
     for (const sq of squares) {
       const b = buttons.get(sq);
       const piece = game.get(sq);
-      b.className = b.className.replace(/\s*(sq-sel|sq-target|sq-last|sq-check|sq-piece)/g, "");
+      b.className = b.className.replace(
+        /\s*(sq-sel|sq-target|sq-last|sq-check|sq-piece)/g,
+        "",
+      );
       if (piece) {
-        const span = el("span", { class: piece.color === "w" ? "p-w" : "p-b", text: GLYPH[piece.type], "aria-hidden": "true" });
+        const span = el("span", {
+          class: piece.color === "w" ? "p-w" : "p-b",
+          text: GLYPH[piece.type],
+          "aria-hidden": "true",
+        });
         b.replaceChildren(span);
         b.classList.add("sq-piece");
-        b.setAttribute("aria-label", `${sq}, ${piece.color === "w" ? "white" : "black"} ${NAME[piece.type]}`);
-        if (inCheck && piece.type === "k" && piece.color === game.turn()) b.classList.add("sq-check");
+        b.setAttribute(
+          "aria-label",
+          `${sq}, ${piece.color === "w" ? "white" : "black"} ${NAME[piece.type]}`,
+        );
+        if (inCheck && piece.type === "k" && piece.color === game.turn())
+          b.classList.add("sq-check");
       } else {
         b.replaceChildren();
         b.setAttribute("aria-label", `${sq}, empty`);
       }
       if (sq === selected) b.classList.add("sq-sel");
       if (targets.includes(sq)) b.classList.add("sq-target");
-      if (last && (sq === last.from || sq === last.to)) b.classList.add("sq-last");
+      if (last && (sq === last.from || sq === last.to))
+        b.classList.add("sq-last");
       b.setAttribute("aria-pressed", sq === selected ? "true" : "false");
     }
 
@@ -178,7 +236,11 @@ export function mount(container) {
     const history = game.history();
     const rows = [];
     for (let i = 0; i < history.length; i += 2) {
-      rows.push(el("li", { text: history[i] + (history[i + 1] ? " " + history[i + 1] : "") }));
+      rows.push(
+        el("li", {
+          text: history[i] + (history[i + 1] ? " " + history[i + 1] : ""),
+        }),
+      );
     }
     moves.replaceChildren(...rows);
   }

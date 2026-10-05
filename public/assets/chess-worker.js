@@ -81,7 +81,10 @@ function evaluate(game) {
   let score = 0;
   const board = game._board; // 0x88: index 0 is a8, row = i >> 4, col = i & 7
   for (let i = 0; i < 120; i++) {
-    if (i & 0x88) { i += 7; continue; }
+    if (i & 0x88) {
+      i += 7;
+      continue;
+    }
     const sq = board[i];
     if (!sq) continue;
     const white = sq.color === "w";
@@ -96,7 +99,11 @@ function evaluate(game) {
 // Captures first, most valuable victim first. Cheap and it helps alpha-beta a lot.
 function ordered(game) {
   const moves = game._moves({ legal: true });
-  moves.sort((a, b) => (b.captured ? VALUES[b.captured] : 0) - (a.captured ? VALUES[a.captured] : 0));
+  moves.sort(
+    (a, b) =>
+      (b.captured ? VALUES[b.captured] : 0) -
+      (a.captured ? VALUES[a.captured] : 0),
+  );
   return moves;
 }
 
@@ -189,11 +196,22 @@ function chooseMove(fen, maxDepth, budgetMs) {
     }
   }
   if (!best) return null;
-  return { san: new Move(game, best).san, depth: reached, nodes, ms: Math.round(performance.now() - start) };
+  return {
+    san: new Move(game, best).san,
+    depth: reached,
+    nodes,
+    ms: Math.round(performance.now() - start),
+  };
 }
 
 self.onmessage = (e) => {
   const { id, fen, depth, budgetMs } = e.data;
   const result = chooseMove(fen, depth, budgetMs || 2000);
-  self.postMessage({ id, san: result ? result.san : null, depth: result ? result.depth : 0, nodes: result ? result.nodes : 0, ms: result ? result.ms : 0 });
+  self.postMessage({
+    id,
+    san: result ? result.san : null,
+    depth: result ? result.depth : 0,
+    nodes: result ? result.nodes : 0,
+    ms: result ? result.ms : 0,
+  });
 };

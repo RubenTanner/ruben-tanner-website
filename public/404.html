@@ -1,43 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page not found</title>
-  <meta name="robots" content="noindex">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#467ceb">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/assets/site.css">
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem("theme");
-        var dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.classList.toggle("dark", dark);
-        document.documentElement.classList.add("js");
-      } catch (e) {}
-    })();
-  </script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="monogram" href="/">RT<span>.</span><span class="visually-hidden"> Ruben Tanner, home</span></a>
-    </div>
-  </header>
-  <main>
-    <section class="hero error">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found</title>
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#467ceb" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/assets/site.css" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var dark = saved
+            ? saved === "dark"
+            : matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.classList.toggle("dark", dark);
+          document.documentElement.classList.add("js");
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
       <div class="wrap">
-        <h1>404</h1>
-        <p class="hero-line">Oops! The page you're looking for seems to have glitched out of existence.</p>
+        <a class="monogram" href="/"
+          >RT<span>.</span
+          ><span class="visually-hidden"> Ruben Tanner, home</span></a
+        >
       </div>
-    </section>
-    <div class="wrap error-body">
-      <p><a href="/">Back to the home page</a>, or email <a href="mailto:hello@ruben-tanner.uk">hello@ruben-tanner.uk</a> if you followed a link from somewhere and it should have worked.</p>
-    </div>
-  </main>
-</body>
+    </header>
+    <main>
+      <section class="hero error">
+        <div class="wrap">
+          <h1>404</h1>
+          <p class="hero-line">
+            Oops! The page you're looking for seems to have glitched out of
+            existence.
+          </p>
+        </div>
+      </section>
+      <div class="wrap error-body">
+        <p>
+          <a href="/">Back to the home page</a>, or email
+          <a href="mailto:hello@ruben-tanner.uk">hello@ruben-tanner.uk</a> if
+          you followed a link from somewhere and it should have worked.
+        </p>
+      </div>
+    </main>
+  </body>
 </html>
